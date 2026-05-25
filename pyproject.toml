@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "openllm-memory"
+version = "0.1.0"
+description = "Δ胶囊记忆层——任何Agent框架可挂载的跨会话连续身份。pip install openllm-memory，你的Agent从此记得用户。"
+readme = "README.md"
+license = {text = "Apache-2.0"}
+requires-python = ">=3.10"
+dependencies = [
+    "numpy>=1.24",
+    "pyyaml>=6.0",
+]
+
+[project.optional-dependencies]
+mcp = ["mcp>=1.0"]
+dev = ["pytest>=7.0"]
+
+[project.scripts]
+openllm-memory = "openllm_memory.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
