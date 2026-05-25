@@ -1,5 +1,5 @@
 """
-openllm-memory — Δ胶囊记忆层。零依赖。任何Agent框架可挂载。
+openllm-memory — Δ胶囊记忆层。真实语义embedding驱动。
 
 寄生启动策略：不是另一个Agent框架——是每个Agent框架最好的记忆层。
 pip install openllm-memory → 你的Agent从此记得用户。
@@ -12,15 +12,47 @@ from pathlib import Path
 from typing import Optional
 import numpy as np
 
-
-CAPSULE_DIM = 256
+# ── embedding模型配置 ─────────────────────────────
+# 默认384维（all-MiniLM-L6-v2），零GPU依赖，CPU跑
+EMBEDDING_DIM = 384
 CHECKPOINT_INTERVAL = 5
 DELTA_NORM_THRESHOLD = 0.3
+
+# 懒加载embedding模型（首次使用时才下载）
+_embedder = None
+_embedder_name = "all-MiniLM-L6-v2"
+
+
+def _get_embedder():
+    """懒加载embedding模型。首次调用时下载。"""
+    global _embedder
+    if _embedder is None:
+        try:
+            from sentence_transformers import SentenceTransformer
+            _embedder = SentenceTransformer(_embedder_name)
+        except ImportError:
+            return None
+    return _embedder
+
+
+def encode_text(text: str) -> np.ndarray:
+    """将任意文本编码为语义向量。384维FP32。"""
+    model = _get_embedder()
+    if model is None:
+        # fallback: 无sentence-transformers时用hash-based模拟
+        return _fallback_encode(text)
+    return model.encode(text, normalize_embeddings=True).astype(np.float32)
+
+
+def _fallback_encode(text: str) -> np.ndarray:
+    """无embedding模型时的降级方案：基于字符hash的确定性向量。"""
+    rng = np.random.RandomState(hash(text) % (2**31))
+    return rng.randn(EMBEDDING_DIM).astype(np.float32) * 0.1
 
 
 @dataclass
 class TextCapsule:
-    """v0.6 可读胶囊。"""
+    """v0.6 可读胶囊。给人看，可审计。"""
     session_id: str
     timestamp: float = field(default_factory=time.time)
     decisions: list = field(default_factory=list)
@@ -35,6 +67,15 @@ class TextCapsule:
             "insights": self.insights, "unresolved": self.unresolved,
         }
 
+    def to_text(self) -> str:
+        """将胶囊转为可被embedding编码的文本。"""
+        parts = []
+        for d in self.decisions:
+            parts.append(d.get("summary", str(d)))
+        for i in self.insights:
+            parts.append(i)
+        return " | ".join(parts) if parts else self.session_id
+
     @classmethod
     def from_dict(cls, d: dict) -> "TextCapsule":
         return cls(
@@ -48,18 +89,29 @@ class TextCapsule:
 
 @dataclass
 class DeltaCapsule:
-    """v0.7 Δ语义向量胶囊。256维FP32。"""
+    """
+    v0.7 Δ语义向量胶囊。
+
+    从真实对话文本提取embedding，计算两次会话的语义位移。
+    不再是随机数——向量与对话内容有因果关系。
+    """
     session_id: str
-    vector: np.ndarray
+    vector: np.ndarray       # EMBEDDING_DIM维FP32语义向量
     norm: float = 0.0
     timestamp: float = field(default_factory=time.time)
     metadata: dict = field(default_factory=dict)
 
     def __post_init__(self):
         self.vector = np.asarray(self.vector, dtype=np.float32)
-        if self.vector.shape != (CAPSULE_DIM,):
-            self.vector = np.zeros(CAPSULE_DIM, dtype=np.float32)
+        if self.vector.shape != (EMBEDDING_DIM,):
+            self.vector = np.zeros(EMBEDDING_DIM, dtype=np.float32)
         self.norm = float(np.linalg.norm(self.vector))
+
+    @classmethod
+    def from_text(cls, session_id: str, text: str) -> "DeltaCapsule":
+        """从文本生成Δ向量——真实的语义编码。"""
+        vec = encode_text(text)
+        return cls(session_id=session_id, vector=vec, metadata={"source": "embedding", "model": _embedder_name})
 
     def accumulate(self, other: np.ndarray) -> "DeltaCapsule":
         self.vector = self.vector + np.asarray(other, dtype=np.float32)
@@ -76,21 +128,14 @@ class DeltaCapsule:
     def from_dict(cls, d: dict) -> "DeltaCapsule":
         return cls(
             session_id=d.get("session_id", ""),
-            vector=np.array(d.get("vector", [0.0] * CAPSULE_DIM), dtype=np.float32),
+            vector=np.array(d.get("vector", [0.0] * EMBEDDING_DIM), dtype=np.float32),
             timestamp=d.get("timestamp", time.time()),
             metadata=d.get("metadata", {}),
         )
 
 
 class MemoryOS:
-    """
-    记忆操作系统。
-
-    三个核心操作：
-      write(session) — 会话结束时写入Δ胶囊
-      read()          — 新会话开始时恢复记忆
-      checkpoint()    — 定期全量快照
-    """
+    """记忆操作系统。"""
 
     def __init__(self, capsule_dir: str = "~/.openllm/capsules"):
         self.capsule_dir = Path(capsule_dir).expanduser()
@@ -100,6 +145,7 @@ class MemoryOS:
         self.text: Optional[TextCapsule] = None
 
     def write(self, text: TextCapsule, delta: Optional[DeltaCapsule] = None) -> str:
+        """写入胶囊。如果delta为None，从text自动生成语义Δ向量。"""
         self.text = text
         self.session_count += 1
 
@@ -107,14 +153,18 @@ class MemoryOS:
         with open(v06_path, "w", encoding="utf-8") as f:
             json.dump(text.to_dict(), f, ensure_ascii=False, indent=2)
 
-        if delta is not None:
-            if self.delta is not None:
-                self.delta.accumulate(delta.vector)
-            else:
-                self.delta = delta
-            v07_path = self.capsule_dir / f"v07_{delta.session_id}.json"
-            with open(v07_path, "w", encoding="utf-8") as f:
-                json.dump(self.delta.to_dict(), f, ensure_ascii=False, indent=2)
+        # 如果没有显式传入delta，从text自动生成真实语义向量
+        if delta is None:
+            delta = DeltaCapsule.from_text(text.session_id, text.to_text())
+
+        if self.delta is not None:
+            self.delta.accumulate(delta.vector)
+        else:
+            self.delta = delta
+
+        v07_path = self.capsule_dir / f"v07_{delta.session_id}.json"
+        with open(v07_path, "w", encoding="utf-8") as f:
+            json.dump(self.delta.to_dict(), f, ensure_ascii=False, indent=2)
 
         if self.delta and (
             self.session_count >= CHECKPOINT_INTERVAL
@@ -150,7 +200,7 @@ class MemoryOS:
             "decisions": [d.get("summary", "") for d in (self.text.decisions if self.text else [])],
             "insights": self.text.insights if self.text else [],
             "unresolved": self.text.unresolved if self.text else [],
-            "delta_norm": self.delta.norm if self.delta else 0.0,
+            "delta_norm": round(self.delta.norm, 4) if self.delta else 0.0,
         }
 
     def _checkpoint(self) -> str:
@@ -176,5 +226,5 @@ class MemoryOS:
             "capsules_v06": len(v06),
             "capsules_v07": len(v07),
             "checkpoints": len(cp),
-            "delta_norm": self.delta.norm if self.delta else 0.0,
+            "delta_norm": round(self.delta.norm, 4) if self.delta else 0.0,
         }

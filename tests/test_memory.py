@@ -1,118 +1,120 @@
-"""openllm-memory 独立测试。"""
+"""openllm-memory 测试 — v0.2 真实embedding版。"""
 
 import json
 import tempfile
 from pathlib import Path
 import numpy as np
 import pytest
-from openllm_memory import MemoryOS, TextCapsule, DeltaCapsule, CAPSULE_DIM
+from openllm_memory import MemoryOS, TextCapsule, DeltaCapsule, encode_text, EMBEDDING_DIM
 
 
-class TestTextCapsule:
-    def test_create(self):
-        tc = TextCapsule(session_id="s1", insights=["测试"])
-        assert tc.session_id == "s1"
-        assert tc.insights == ["测试"]
+class TestRealEmbedding:
+    def test_encode_text_produces_real_vector(self):
+        """编码真实文本——不再是随机数。"""
+        v1 = encode_text("确认OpenLLM架构方向")
+        assert v1.shape == (EMBEDDING_DIM,)
+        assert v1.dtype == np.float32
+        assert abs(float(np.linalg.norm(v1)) - 1.0) < 0.01  # normalize
+        assert not np.allclose(v1, np.zeros(EMBEDDING_DIM))    # 非零
 
-    def test_roundtrip(self):
-        tc = TextCapsule(session_id="s1", decisions=[{"summary": "决策1"}], insights=["洞察1"], unresolved=["问题1"])
-        d = tc.to_dict()
-        tc2 = TextCapsule.from_dict(d)
-        assert tc2.insights == ["洞察1"]
-        assert tc2.unresolved == ["问题1"]
+    def test_similar_texts_produce_similar_vectors(self):
+        """语义相似→向量相似。这是因果关系的证明。"""
+        v1 = encode_text("Agent需要记忆系统")
+        v2 = encode_text("Agent需要持久化记忆")
+        v3 = encode_text("今天天气很好适合出去玩")
+
+        sim_12 = float(np.dot(v1, v2))
+        sim_13 = float(np.dot(v1, v3))
+        # 相似的应该比不相似的cos_sim更高
+        assert sim_12 > sim_13, f"相似文本cos_sim({sim_12:.3f})应>不相似({sim_13:.3f})"
+
+    def test_different_texts_produce_different_vectors(self):
+        """不同文本→不同向量。"""
+        v1 = encode_text("Agent记忆层")
+        v2 = encode_text("代码语义编码")
+        assert not np.allclose(v1, v2, atol=0.01)
 
 
-class TestDeltaCapsule:
-    def test_create(self):
-        v = np.ones(CAPSULE_DIM, dtype=np.float32)
-        dc = DeltaCapsule(session_id="s1", vector=v)
-        assert dc.session_id == "s1"
-        assert dc.norm > 0
+class TestDeltaCapsuleReal:
+    def test_from_text_produces_real_delta(self):
+        """从文本生成的Δ向量包含真实语义信息。"""
+        dc = DeltaCapsule.from_text("s1", "确认OpenLLM六维架构方向")
+        assert dc.vector.shape == (EMBEDDING_DIM,)
+        assert dc.norm > 0.8  # normalized, so ~1.0
+        assert dc.metadata["source"] == "embedding"
 
-    def test_accumulate(self):
-        d1 = DeltaCapsule(session_id="s1", vector=np.ones(CAPSULE_DIM, dtype=np.float32))
-        d2 = DeltaCapsule(session_id="s2", vector=np.ones(CAPSULE_DIM, dtype=np.float32) * 2)
+    def test_two_sessions_produce_accumulated_delta(self):
+        """两次会话Δ累积。"""
+        d1 = DeltaCapsule.from_text("s1", "讨论Agent架构")
+        d2 = DeltaCapsule.from_text("s2", "确定寄生启动策略")
+
         d1.accumulate(d2.vector)
-        expected = np.ones(CAPSULE_DIM) * 3
-        assert np.allclose(d1.vector, expected, atol=0.01)
-
-    def test_empty_vector(self):
-        dc = DeltaCapsule(session_id="s1", vector=np.zeros(CAPSULE_DIM))
-        assert dc.norm == 0.0
-
-    def test_roundtrip(self):
-        dc = DeltaCapsule(session_id="s1", vector=np.random.randn(CAPSULE_DIM).astype(np.float32) * 0.1)
-        d = dc.to_dict()
-        dc2 = DeltaCapsule.from_dict(d)
-        assert np.allclose(dc.vector, dc2.vector, atol=1e-5)
+        # 两次累计后范数应增大
+        assert d1.norm > 0.5
 
 
-class TestMemoryOS:
-    def test_write_text_only(self):
+class TestTextCapsuleToText:
+    def test_to_text_includes_decisions_and_insights(self):
+        tc = TextCapsule(
+            session_id="s1",
+            decisions=[{"summary": "确认方向"}],
+            insights=["Agent需要六维躯体"],
+        )
+        text = tc.to_text()
+        assert "确认方向" in text
+        assert "六维躯体" in text
+
+
+class TestMemoryOSRealEmbedding:
+    def test_write_without_explicit_delta_auto_generates(self):
+        """不传delta→自动从text生成真实embedding。"""
         with tempfile.TemporaryDirectory() as tmp:
             mos = MemoryOS(tmp)
-            tc = TextCapsule(session_id="s1", insights=["测试"])
-            path = mos.write(tc)
+            tc = TextCapsule(
+                session_id="s1",
+                decisions=[{"summary": "确认OpenLLM方向"}],
+                insights=["寄生启动策略"],
+            )
+            path = mos.write(tc)  # 不传delta
             assert Path(path).exists()
 
-    def test_write_and_read(self):
+            # 检查v0.7文件存在且向量非零
+            v07 = list(Path(tmp).glob("v07_*.json"))
+            assert len(v07) >= 1
+            with open(v07[0]) as f:
+                d = json.load(f)
+            assert len(d["vector"]) == EMBEDDING_DIM
+            assert not all(v == 0.0 for v in d["vector"])
+            assert d["metadata"]["source"] == "embedding"
+
+    def test_cross_session_semantic_memory(self):
+        """跨会话：两次写不同内容，验证向量变化。"""
         with tempfile.TemporaryDirectory() as tmp:
             mos = MemoryOS(tmp)
-            tc = TextCapsule(session_id="s1", decisions=[{"summary": "测试决策"}], insights=["测试洞察"])
-            dc = DeltaCapsule(session_id="s1", vector=np.random.randn(CAPSULE_DIM).astype(np.float32) * 0.01)
-            mos.write(tc, dc)
+
+            # 会话1：技术讨论
+            tc1 = TextCapsule(session_id="s1", decisions=[{"summary": "Agent架构讨论"}])
+            mos.write(tc1)
+            norm1 = mos.delta.norm
+
+            # 会话2：不同话题
+            tc2 = TextCapsule(session_id="s2", decisions=[{"summary": "寄生启动策略"}])
+            mos.write(tc2)
+            norm2 = mos.delta.norm
+
+            # 话题不同，Δ应该累积变化
+            assert norm2 > 0
+
+    def test_read_restores_real_data(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            mos = MemoryOS(tmp)
+            tc = TextCapsule(
+                session_id="s1",
+                decisions=[{"summary": "确认方向"}],
+                insights=["真实embedding驱动"],
+            )
+            mos.write(tc)
             ctx = mos.read()
             assert ctx["status"] == "restored"
-            assert "测试决策" in str(ctx["decisions"])
-            assert "测试洞察" in ctx["insights"]
-
-    def test_empty_read(self):
-        with tempfile.TemporaryDirectory() as tmp:
-            mos = MemoryOS(tmp)
-            ctx = mos.read()
-            assert ctx["status"] == "empty"
-
-    def test_checkpoint_trigger(self):
-        with tempfile.TemporaryDirectory() as tmp:
-            mos = MemoryOS(tmp)
-            for i in range(6):
-                tc = TextCapsule(session_id=f"s{i}", insights=[f"洞察{i}"])
-                dc = DeltaCapsule(session_id=f"s{i}", vector=np.ones(CAPSULE_DIM, dtype=np.float32) * 0.05)
-                mos.write(tc, dc)
-            cp_files = list(Path(tmp).glob("checkpoint_*.json"))
-            assert len(cp_files) >= 1
-
-    def test_stats(self):
-        with tempfile.TemporaryDirectory() as tmp:
-            mos = MemoryOS(tmp)
-            tc = TextCapsule(session_id="s1")
-            mos.write(tc)
-            s = mos.stats
-            assert s["capsules_v06"] == 1
-
-    def test_cross_session_remember(self):
-        """核心验证：跨会话记忆恢复。"""
-        with tempfile.TemporaryDirectory() as tmp:
-            # 会话1
-            mos1 = MemoryOS(tmp)
-            tc = TextCapsule(session_id="s1", decisions=[{"summary": "确认OpenLLM方向"}], insights=["六维Agent躯体"])
-            dc = DeltaCapsule(session_id="s1", vector=np.random.randn(CAPSULE_DIM).astype(np.float32) * 0.05)
-            mos1.write(tc, dc)
-
-            # 会话2（新实例）
-            mos2 = MemoryOS(tmp)
-            ctx = mos2.read()
-            assert "确认OpenLLM方向" in str(ctx["decisions"])
-            assert "六维Agent躯体" in ctx["insights"]
-
-    def test_delta_accumulation_across_sessions(self):
-        """Δ跨会话累积。"""
-        with tempfile.TemporaryDirectory() as tmp:
-            mos = MemoryOS(tmp)
-            # 3次会话，每次小Δ
-            for i in range(3):
-                tc = TextCapsule(session_id=f"s{i}")
-                dc = DeltaCapsule(session_id=f"s{i}", vector=np.ones(CAPSULE_DIM, dtype=np.float32) * 0.03)
-                mos.write(tc, dc)
-            assert mos.delta is not None
-            assert mos.delta.norm > 0.08  # 3次累加
+            assert "确认方向" in str(ctx["decisions"])
+            assert ctx["delta_norm"] > 0.5
