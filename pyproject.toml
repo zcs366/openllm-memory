@@ -1,0 +1,43 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "openllm-memory"
+version = "0.1.0"
+description = "Δ Capsule — Event-sourced, identity-driven memory layer for AI agents"
+readme = "README.md"
+license = { text = "Apache-2.0" }
+authors = [
+    { name = "zcs366" },
+]
+keywords = ["memory", "agent", "ai", "capsule", "delta", "identity"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+requires-python = ">=3.10"
+dependencies = [
+    "pyyaml>=6.0",
+]
+
+[project.optional-dependencies]
+hermes = [
+    "hermes-agent>=3.0",
+]
+mcp = [
+    "mcp>=1.0",
+]
+all = [
+    "openllm-memory[hermes,mcp]",
+]
+
+[project.urls]
+"Source" = "https://github.com/zcs366/openllm-memory"
+"Bug Reports" = "https://github.com/zcs366/openllm-memory/issues"
+
+[tool.setuptools.packages.find]
+where = ["src"]
