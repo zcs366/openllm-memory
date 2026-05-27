@@ -16,7 +16,7 @@ def generate_random_string(length=10):
     return ''.join(random.choices(string.ascii_letters + string.digits, k=length))
 
 
-def test_performance_at_scale(num_items, num_queries=100):
+def performance_at_scale(num_items, num_queries=100):
     """测试特定规模下的性能
     
     Args:
@@ -100,7 +100,7 @@ def run_performance_tests():
     results = []
     for scale in scales:
         print(f"测试规模: {scale} 项数据")
-        result = test_performance_at_scale(scale, num_queries=50)
+        result = performance_at_scale(scale, num_queries=50)
         results.append(result)
         
         # 输出结果
@@ -157,6 +157,38 @@ def run_performance_tests():
     for result in results:
         stats = result['hash_index_stats']
         print(f"{result['num_items']:<10} {stats['collision_rate']:.2%}{'':<10} {stats['load_factor']:.2%}")
+
+
+def test_performance_basic():
+    """测试基本性能功能"""
+    print("\n=== 测试基本性能功能 ===")
+    
+    # 运行小规模性能测试
+    result = performance_at_scale(100, num_queries=10)
+    
+    # 验证结果
+    assert result['num_items'] == 100
+    assert result['num_queries'] == 10
+    assert 'write_time_with_hash' in result
+    assert 'write_time_without_hash' in result
+    assert 'exact_lookup_time_with_hash' in result
+    assert 'exact_lookup_time_without_hash' in result
+    assert 'fuzzy_lookup_time_with_hash' in result
+    assert 'fuzzy_lookup_time_without_hash' in result
+    assert 'hash_index_stats' in result
+    
+    # 验证时间合理性
+    assert result['write_time_with_hash'] > 0
+    assert result['write_time_without_hash'] > 0
+    assert result['exact_lookup_time_with_hash'] > 0
+    assert result['exact_lookup_time_without_hash'] > 0
+    
+    # 验证哈希索引统计
+    stats = result['hash_index_stats']
+    assert 'collision_rate' in stats
+    assert 'load_factor' in stats
+    
+    print("✓ 基本性能功能测试通过")
 
 
 if __name__ == "__main__":
