@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "openllm-memory"
-version = "0.1.0"
+version = "1.1.0"
 description = "Δ Capsule — Event-sourced, identity-driven memory layer for AI agents"
 readme = "README.md"
 license = { text = "Apache-2.0" }

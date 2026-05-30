@@ -10,6 +10,8 @@
 
 - **事件溯源**：每个操作可追溯、可回滚、可审计
 - **跨会话身份**：SOUL + Iam + Δ胶囊 = 身份连续性
+- **跨频道共振**：同一身份的多实例通过共享记忆层同步（§3.3）
+- **眨眼协作**：从共振中涌现的异步多Agent协作协议（§3.3.2）
 - **哈希索引加速**：纯Python多头哈希索引，检索性能提升2.28x - 2.83x
 - **相似度门控**：基于TF-IDF的查询-记忆相似度计算
 - **路由分层评估**：Hot/Cold分层评估和α桶分析
@@ -18,7 +20,13 @@
 ## 安装
 
 ```bash
+# 极简安装（零额外依赖，仅需 pyyaml）
 pip install openllm-memory
+
+# 或从源码安装（含共振/眨眼演示）
+git clone https://github.com/zcs366/openllm-memory.git
+cd openllm-memory
+pip install -e .
 ```
 
 ## 一分钟上手
@@ -26,16 +34,24 @@ pip install openllm-memory
 ```python
 from openllm_memory import Capsule
 
-# 打开一个记忆胶囊（启用哈希索引加速）
+# 打开记忆胶囊
 capsule = Capsule.open("~/.openllm/my-agent", use_hash_index=True)
 
-# 写一条记忆（一个Δ操作）
+# 写入记忆
 capsule.write("user_pref", {"language": "zh", "name": "张成市"})
 capsule.write("user.age", 30)
 
-# 检索记忆（使用哈希索引加速）
+# 检索
 results = capsule.prefetch("user")
 print(results)
+```
+
+## 眨眼协作演示
+
+```bash
+# 端到端眨眼机制演示——两个Agent实例通过共享记忆层协作
+python -m openllm_memory.capsule.blink
+```
 
 # 跨会话恢复
 capsule2 = Capsule.open("~/.openllm/my-agent")
