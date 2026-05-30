@@ -4,14 +4,13 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "openllm-memory"
-version = "1.1.0"
-description = "Δ Capsule — Event-sourced, identity-driven memory layer for AI agents"
-readme = "README.md"
+version = "1.1.1"
+description = "Δ Capsule — Event-sourced, identity-driven memory + Blink protocol for AI agents"
+keywords = ["memory", "agent", "ai", "capsule", "delta", "identity", "blink", "resonance", "multi-agent", "collaboration"]
 license = { text = "Apache-2.0" }
 authors = [
     { name = "zcs366" },
 ]
-keywords = ["memory", "agent", "ai", "capsule", "delta", "identity"]
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Developers",

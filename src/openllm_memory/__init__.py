@@ -14,6 +14,8 @@ from .capsule.core import Capsule
 from .capsule.delta import Delta, DeltaOp
 from .identity.soul import Soul
 from .identity.iam import Iam
+from .capsule.resonance import SharedMemory, ResonanceCapsule, ResonanceProtocol
+from .capsule.blink import BlinkMonitor
 
 __all__ = [
     "Capsule",
@@ -21,5 +23,10 @@ __all__ = [
     "DeltaOp",
     "Soul",
     "Iam",
+    # 共振与眨眼
+    "SharedMemory",
+    "ResonanceCapsule",
+    "ResonanceProtocol",
+    "BlinkMonitor",
 ]
-__version__ = "0.1.0"
+__version__ = "1.1.1"

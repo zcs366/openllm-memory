@@ -1,10 +1,45 @@
-# OpenLLM Memory — Δ Capsule
+# OpenLLM Memory — Δ Capsule + 眨眼协议
 
-> 第一个有身份的Agent记忆层。
+> 第一个有身份的Agent记忆层。以及，三十年来第一个新的分布式系统原语。
 
 **不是什么？** 不是又一个Agent框架。不是MCP服务器。不是知识库。
 
-**是什么？** 事件溯源的Δ胶囊记忆系统——让任何Agent拥有跨会话的身份连续性。
+**是什么？** 事件溯源的Δ胶囊记忆系统 + **眨眼（Blink）**——从共振中涌现的异步多Agent协作协议。
+
+---
+
+## ⚡ 眨眼协议 — 30秒速览
+
+```python
+from openllm_memory import SharedMemory, ResonanceProtocol, BlinkMonitor
+
+# 两个 Agent 实例共享同一个 SOUL
+shared = SharedMemory("/tmp/blink-shared")
+agent_a = ResonanceProtocol("my-soul", "channel-a", shared)
+agent_b = ResonanceProtocol("my-soul", "channel-b", shared)
+
+# A 发送任务完成胶囊
+agent_a.send({"text": "任务X完成，结果在 /tmp/out.json", "intent": "inform"})
+
+# B 眨眼发现
+def on_discover(capsule):
+    print(f"[B] 眨眼发现: {capsule.content['text']}")
+    agent_b.respond(capsule.capsule_id, {"text": "收到，继续处理"})
+
+monitor = BlinkMonitor(agent_b, on_capsule=on_discover)
+monitor.blink_once()  # 眨一次眼
+```
+
+**心跳问"你在吗？" 眨眼问"你需要我吗？"** ——这是三十年来分布式系统原语的第一次进化：从监控到协作。
+
+```bash
+pip install openllm-memory
+python -m openllm_memory.capsule.blink  # 运行演示
+```
+
+完整形式化定义见 [`src/openllm_memory/capsule/blink.py`](src/openllm_memory/capsule/blink.py)（含可见性不变量、幂等性保证、心跳vs眨眼8维对比表）。
+
+---
 
 ## 特性
 
