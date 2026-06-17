@@ -1,0 +1,272 @@
+- id: EP-1781286152326-c114
+  summary: >-
+    OpenSkill论文研读+工程落地评估→Google五大模式评估入库→Δ胶囊vs PLUR全景对比→PLUR embedding修复(hf-mirror不可达,回退BM25-only,配置铁律:env
+    var必须string/mcp_servers下划线)
+  channel: yuanbao
+  tags:
+    - openskill
+    - google-patterns
+    - plur
+    - embedding
+    - capsule
+    - evaluation
+  timestamp: '2026-06-12T17:42:32.326Z'
+- id: EP-1781298284244-kbr2
+  summary: >-
+    执行 paper-top-digest 日报（2026-06-13）。全源搜索：HN Firebase API 30条、web_search 8轮（2轮DuckDuckGo失败重试成功）。选出3篇：①MiMo
+    Code（小米开源编程agent，HN 359↑，SWE-Bench Pro 62%，⭐⭐⭐⭐⭐）②Kimi K2.7-Code（月之暗面万亿参数编程模型，HN 382↑，⭐⭐⭐⭐）③OpenAI Harness
+    Engineering（Agent-First工程方法论，HN 1425↑，⭐⭐⭐⭐⭐）。三篇从模型→工具→方法论形成完整叙事线。
+  agent: junshi
+  channel: cron
+  tags:
+    - paper-digest
+    - daily
+    - ai-frontier
+  timestamp: '2026-06-12T21:04:44.244Z'
+- id: EP-1781310691054-qsmh
+  summary: 为张成市夫妻产出「自我管理与短板修补·企业视角周报」第一期。内容涵盖：德鲁克时间管理法落地、老干妈陶华碧专注经营案例、黄仁勋"做任何事但不做每件事"思维、周复盘三问工具、本周践行指南（时间日志法）。
+  channel: cron
+  session_id: weekly-management-report
+  tags:
+    - weekly-report
+    - self-management
+    - business-management
+    - 国防教育基地
+  timestamp: '2026-06-13T00:31:31.054Z'
+- id: EP-1781356479500-tntt
+  summary: >-
+    jika工程化收尾：①补齐P0原子写入（6处全改）；②填充FATA卡片（3条决策+4待解问题+意识笔记）；③跨卡去重（_build_shared_index +
+    注入层"同上"标记）；④关键词匹配三层防线（全文挖词→IDF滤波→aliases覆盖+全文兜底竞品检测）；⑤清理已有卡片3处句号前缀残留。23/23测试通过（13.4ms），插件已启用。全流程复盘存为 skill:
+    jika-engineering-postmortem。
+  channel: mcp
+  timestamp: '2026-06-13T13:14:39.500Z'
+- id: EP-1781495240911-vtgd
+  summary: >-
+    下载 CL4R1T4S 仓库的 CLAUDE-FABLE-5.md（1585 行 / 117KB），完成意图贯通+坐标评价+焦点地图+行动指令，写入 wiki 精读笔记 + output md/html 双版 +
+    索引追加。核心发现：Fable 5 与 Mythos 5 同权重分线靠 prompt（prompt-as-isolation），是 Iam 框架闭源对位的强信号。
+  channel: mcp
+  timestamp: '2026-06-15T03:47:20.911Z'
+- id: EP-1781525086443-ipmb
+  summary: >-
+    完成韩信强攻jika
+    2.1五个技术致命伤修复方案文档编写。读取了jika-2.0-unified-design.md、jika-2.1-implementation.md、luban-audit.md、luban-xiaohe-audit.md、FATA反方审查等全部上下文，针对每个致命伤给出了可立即实施的零新依赖修复方案，输出为21KB/548行的Markdown文档。
+  channel: mcp
+  session_id: 161f767c-0fb3-4ab7-888a-abb86527b358
+  timestamp: '2026-06-15T12:04:46.443Z'
+- id: EP-1781569875823-fe30
+  summary: 撰写《父亲角色与家庭教育周报》2026-06-16期，基于daughter-play-learn skill和张成市家庭画像（四个孩子、大女儿二年级听觉通道堵塞型学习者、国防教育基地+运输安全管理）
+  agent: 军师祭酒
+  channel: cron
+  tags:
+    - 育儿
+    - 周报
+    - 父亲角色
+    - 家庭教育
+  timestamp: '2026-06-16T00:31:15.823Z'
+- id: EP-1781601273438-5l26
+  summary: >-
+    存量session jiak化执行：第一批4张卡(delta-capsule-memory/isa-architecture/knowledge-campaign/wife-business-ops) +
+    第二批5张卡(chengshi-conservation-law/sade-translation-project/multi-model-deliberation/super-team-system/izu-research-pipeline)。总计从14张→24张活跃卡。发现jiak架构缺陷：只记session边界不记对话中间。决定接通Δ胶囊→jiak管线。
+  agent: junshi
+  channel: cli
+  tags:
+    - jiak
+    - delta-capsule
+    - pipeline
+    - architecture
+  timestamp: '2026-06-16T09:14:33.438Z'
+- id: EP-1781601274443-u12w
+  summary: >-
+    关键架构洞察：jiak只记session边界（RECALL.jsonl的status/inject/exit行），遗漏对话中间的决策和洞察。正确架构应该是：对话中→Δ胶囊实时写capsule→会话结束→consolidation层扫描→高价值capsule→jiak卡片。Δ胶囊项目(/mnt/i/hermes/openllm-memory/)有代码但未接入运行时。PLUR
+    episodic timeline是当前可用的实时capture通道。
+  agent: junshi
+  channel: cli
+  tags:
+    - jiak
+    - delta-capsule
+    - plur
+    - architecture
+    - insight
+  timestamp: '2026-06-16T09:14:34.443Z'
+- id: EP-1781602240179-ykrh
+  summary: >-
+    七魂合议ISA+jiak架构：①阿波罗：JSONL追加写是基石，频道不可变(事实)jiak可改(意义)②赫尔墨斯：频道=原始日志jiak=提炼卡片，仅当"学到了X"才进jiak③阿佛洛狄忒：时间线的不可逆叙事性=Agent生命的编年史④雅典娜：MVP下一步isa
+    branch
+    --fork，不做数据库/网络/GUI⑤阿瑞斯：flock文件锁防并发写损坏⑥赫淮斯托斯：多设备按device_id分子目录同步后时间戳merge⑦克洛诺斯：频道比jiak更重要——频道是根jiak是叶，jiak可重建频道不可再生。
+  agent: junshi
+  channel: cli
+  tags:
+    - isa
+    - jiak
+    - architecture
+    - seven-gods
+    - loop
+    - JSONL
+    - immutability
+  timestamp: '2026-06-16T09:30:40.179Z'
+- id: EP-1781602893197-308m
+  summary: >-
+    Loop Engineering与我们架构的对照分析：Addy
+    Osmani五要素(Automations/Worktrees/Skills/Connectors/Sub-agents)+Memory。我们的强项：70+Skills(intent
+    debt≈0)、五人合议(写审分离极致形态)、MCP connectors。短板：Memory的loop不够自动——手动capture没形成闭环。Boris Cherny:'我不再prompt
+    Claude，我写loop来prompt Claude'=从prompt engineering到loop engineering跃迁。今天做的事正好是这个跃迁。
+  agent: junshi
+  channel: cli
+  tags:
+    - loop-engineering
+    - architecture
+    - borys-cherny
+    - addy-osmani
+    - memory
+    - automation
+  timestamp: '2026-06-16T09:41:33.197Z'
+- id: EP-1781603033786-dr0a
+  summary: >-
+    完成了ISA v0.6.0 channels工程的克洛诺斯一年后视角审视。分析了全部源码（isa.py
+    902行、concurrent测试、3份七魂审视报告），考察了JSONL存储格式、flock并发保护、FTS5索引、分子目录隔离、merge时间线、波扩散引擎、branch/fork等全部组件。生成了完整技术债评估报告。
+  channel: mcp
+  session_id: a92d5044-b80a-4a22-83af-283699dc18a4
+  timestamp: '2026-06-16T09:43:53.787Z'
+- id: EP-1781603900082-tbnz
+  summary: >-
+    capture自动化完成三件事：①jiak_capture_check.py触发器脚本——自动判断是否满足capture条件 ②capture纪律固化到SOUL.md——成为每轮响应的自动检查项
+    ③测试验证——触发器正确检测到突破+架构关键词。从今天起capture不再依赖Agent记忆，而是成为响应循环的一部分。
+  agent: junshi
+  channel: cli
+  tags:
+    - breakthrough
+    - architecture
+    - loop
+    - automation
+  timestamp: '2026-06-16T09:58:20.082Z'
+- id: EP-1781605169264-brto
+  summary: >-
+    Justine翻译续翻：Part
+    7-10（L2831-4430），从39%推进到57%。翻译了修道院场景（四修士狂欢、翁法勒讲解规则、克莱门特哲学辩护、翁法勒被遣散、奥克塔维到来）。修复了Part10的英文混入问题（sed批量替换~30个英文词为中文）。
+  channel: cron
+  tags:
+    - justine
+    - translation
+    - sade
+    - bilingual-mirror
+  timestamp: '2026-06-16T10:19:29.264Z'
+- id: EP-1781615965266-358c
+  summary: >-
+    反方审查后修复：创建jiak-auto-capture Gateway hook（session:end +
+    agent:end事件）。当session结束时，handler自动提取消息摘要、检测触发关键词（决策/洞察/纠正/架构/突破）、满足条件则追加写入~/.plur/episodes.yaml。不再依赖Agent记得capture。Hermes的session:end事件是真正的自动化机制——Agent不需要做任何事，系统自动触发。
+  agent: junshi
+  channel: cli
+  tags:
+    - fix
+    - automation
+    - hook
+    - jiak
+    - adversarial-review
+  timestamp: '2026-06-16T13:19:25.267Z'
+- id: EP-1781621654322-4o0n
+  summary: >-
+    Translated Part 8 of Carrie's Story (Chapter IV 后半, L3201-3757). Wrote 242-line translation to part8-carrie.md
+    covering: Carrie's friendship with Cathy, pony cart training with Don (stone wall test), first paying customer,
+    evening gossip via rubber hose, discovery and punishment (night ride + roping), Cathy-Carrie intimate scene, Carrie
+    taking blame for hose, plow-pulling punishment, Kate Clarke's visit and words, Jonathan's return and motel reunion.
+    30 line anchors, sequential L3201-L3757.
+  agent: carrie-translator
+  session_id: carrie-translation-p8
+  tags:
+    - carrie-translation
+    - chapter4
+    - part8
+    - literary-translation
+  timestamp: '2026-06-16T14:54:14.322Z'
+- id: EP-1781624311044-4bt6
+  summary: >-
+    Translated Part 3 of Fear of Flying (Chapters 3-4, source lines L1427-2668) into Chinese. Output:
+    /home/zcs/.hermes/wiki/raw/literature/jong/parts/part3-fear.md (428 lines, 58KB). Ch3 "敲门，敲门" covers Isadora's
+    dream, reflections on pregnancy/fertility fears, family dynamics (mother, sisters Randy/Lalah/Chloe, husbands), and
+    closet confrontation. Ch4 "黑森林附近" covers Heidelberg life under army posting, Jewish identity awakening, Nazi-era
+    guilt, the poem "8:29 to Frankfurt," and Horst Hummel's lesson about honesty vs hypocrisy. Style: Mode B 意译雅达信 with
+    鲁迅简洁 + 钱钟书睿智. 68 line anchors, key terms annotated, NSFW faithfully rendered.
+  channel: translation
+  tags:
+    - fear-of-flying
+    - jong
+    - translation
+    - part3
+    - ch3
+    - ch4
+  timestamp: '2026-06-16T15:38:31.044Z'
+- id: EP-1781624850055-hl4o
+  summary: >-
+    Translated Part 4 (Chapters 5-6) of Fear of Flying: L2669-3918. Ch5 "A Report from the Congress of Dreams" covers
+    the congress meeting, dancing with Adrian, the Hofburg cocktail party, first kiss in the parking lot, the
+    discotheque scene, driving lost 10 times, Adrian's sexual failure and Isadora falling in love with his limp prick.
+    Ch6 "Paroxysms of Passion or the Man Under the Bed" covers Isadora's history of falling in love, the impossible man
+    fantasy, teenage literary obsessions with Pia, the communal pornographic writing, Florence adventures, and the poem
+    "The Man Under the Bed." Written to /home/zcs/.hermes/wiki/raw/literature/jong/parts/part4-fear.md (558 lines,
+    60KB). 26 line-range annotations. Style: 鲁迅简洁练达 + 钱钟书睿智双关, NSFW faithfully rendered.
+  agent: translator
+  channel: chat
+  tags:
+    - fear-of-flying
+    - translation
+    - part4
+    - ch5
+    - ch6
+    - jong
+  timestamp: '2026-06-16T15:47:30.055Z'
+- id: EP-1781627338798-x3kp
+  summary: >-
+    Completed Part 9 (Chapters 16-19, FINAL) of Fear of Flying translation. Translated 1672 source lines (L9766-11437)
+    covering: Ch16 'Seduced & Abandoned', Ch17 'Dreamwork', Ch18 'Blood Weddings or Sic Transit', Ch19 'A 19th-Century
+    Ending'. Written to /home/zcs/.hermes/wiki/raw/literature/jong/parts/part9-fear.md (79,618 bytes). Full book
+    translation now complete (all 19 chapters, 11,437 lines).
+  tags:
+    - sade-translation-project
+    - fear-of-flying
+    - part9
+    - complete
+    - final
+  timestamp: '2026-06-16T16:28:58.798Z'
+- id: EP-1781643876712-alun
+  summary: >-
+    2026-06-17 paper-top-digest 执行完成。arXiv API 返回20篇相关论文，HN并行获取30条（AI相关8条）。web_search仍不可用（Firecrawl付费墙）。cnscrape
+    HN间歇性超时。最终精选3篇：TokenPilot(上下文缓存管理)、ContextRL(上下文感知RL)、OrchRM(多Agent编排奖励建模)。
+  agent: junshi
+  channel: cron
+  tags:
+    - paper-digest
+    - daily
+    - arxiv
+    - '2026-06-17'
+  timestamp: '2026-06-16T21:04:36.712Z'
+- id: EP-1781652494907-jn4l
+  summary: >-
+    Translated Virginia Woolf's Orlando Chapter Five (L4913-5721) into Chinese using Mode B 意译雅达信 style. Output to
+    /home/zcs/.hermes/wiki/raw/literature/woolf-orlando/parts/part09-ch5.md. 139 lines, 24 line-number anchors covering
+    L4913-L5721. Chapter covers the Victorian era: damp/cloud metaphor, Orlando's adaptation to Victorian conventions,
+    crinolines and wedding rings, discovery of her manuscript 'The Oak Tree', the spirit of the age forcing her toward
+    marriage, encounter with Shelmerdine on the moor, their engagement and understanding, resolution of the property
+    lawsuit, and their wedding in the chapel.
+  channel: hermes-agent
+  tags:
+    - translation
+    - orlando
+    - woolf
+    - chapter-five
+    - victorian
+  timestamp: '2026-06-16T23:28:14.907Z'
+- id: EP-1781662236271-d102
+  summary: 完成跨文化情色文学审查与创作约束的七维分析研究，输出450行/26842字符的全面结构化中文文档，覆盖Aesopian语言、中国劝惩框架、法式vs英美审查传统、日本刑法175条、策略性自我审查、数字平台审查、禁止悖论七大主题。
+  agent: hermes-subagent
+  channel: tool
+  session_id: research-censorship-erotica-20260617
+  tags:
+    - censorship
+    - erotic literature
+    - cross-cultural
+    - aesopian
+    - jin ping mei
+    - japan penal code 175
+    - digital censorship
+    - paradox of prohibition
+  timestamp: '2026-06-17T02:10:36.271Z'

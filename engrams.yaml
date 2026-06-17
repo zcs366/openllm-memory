@@ -1,0 +1,2314 @@
+engrams:
+  - id: ENG-2026-0612-001
+    version: 2
+    status: active
+    consolidated: false
+    type: procedural
+    scope: global
+    visibility: public
+    statement: >-
+      OpenSkill三件套落地评估(0612)：skillweaver.py当前只是JSON
+      spec不可执行，需改造为真正编排器。verify_anchors.py依赖web_search无fallback。端到端只跑了1个demo(股票分析)不够证明泛化性。P0改造方向：①skillweaver.py可执行化
+      ②3领域验证 ③output_governance纳cron ④verify_anchors增加bing_search fallback ⑤在DeepSeek/Qwen上复现验证。
+    source: session_20260612_095245_5dc62c
+    derivation_count: 1
+    pack: null
+    abstract: null
+    derived_from: null
+    knowledge_type:
+      memory_class: procedural
+      cognitive_level: apply
+    domain: engineering.openskill
+    tags:
+      - openskill
+      - skillweaver
+      - evaluation
+      - p0
+      - improvement
+    activation:
+      retrieval_strength: 1
+      storage_strength: 1
+      frequency: 6
+      last_accessed: "2026-06-16"
+    associations:
+      - target_type: engram
+        target: ENG-2026-0612-002
+        strength: 0.35
+        type: co_accessed
+        updated_at: "2026-06-13"
+      - target_type: engram
+        target: ENG-2026-0612-003
+        strength: 0.3
+        type: co_accessed
+        updated_at: "2026-06-14"
+      - target_type: engram
+        target: ENG-2026-0613-007
+        strength: 0.3
+        type: co_accessed
+        updated_at: "2026-06-14"
+      - target_type: engram
+        target: ENG-2026-0613-003
+        strength: 0.35
+        type: co_accessed
+        updated_at: "2026-06-16"
+    knowledge_anchors: []
+    feedback_signals:
+      positive: 0
+      negative: 0
+      neutral: 0
+    polarity: null
+    content_hash: 239d65d92781a51fc15eac6adbede68f711c48da120dd5245b5cff2b88a6926e
+    commitment: leaning
+    reference_count: 1
+    sources:
+      - scope: global
+        session_id: null
+        stored_at: "2026-06-12T11:44:01.190Z"
+    recurrence_count: 0
+    engram_version: 1
+    episode_ids: []
+    summary: OpenSkill三件套落地评估(0612)：skillweaver.py当前只是JSON...
+  - id: ENG-2026-0612-002
+    version: 2
+    status: active
+    consolidated: false
+    type: architectural
+    scope: global
+    visibility: public
+    statement: >-
+      verify_anchors.py的核心设计哲学："不搜怎么做，专搜怎么验证"。四类锚点：reference_values(已知输入输出对)、statistical_invariants(统计不变量)、cross_validation(跨工具验证)、published_benchmarks(公开基准)。这是从"正向知识获取"到"验证导向知识获取"的范式转变。
+    derivation_count: 1
+    pack: null
+    abstract: null
+    derived_from: null
+    knowledge_type:
+      memory_class: semantic
+      cognitive_level: evaluate
+    domain: engineering.openskill
+    tags:
+      - openskill
+      - verification
+      - paradigm
+      - anchors
+    activation:
+      retrieval_strength: 0.9999999999999999
+      storage_strength: 1
+      frequency: 3
+      last_accessed: "2026-06-14"
+    associations:
+      - target_type: engram
+        target: ENG-2026-0612-001
+        strength: 0.35
+        type: co_accessed
+        updated_at: "2026-06-13"
+    knowledge_anchors: []
+    feedback_signals:
+      positive: 0
+      negative: 0
+      neutral: 0
+    polarity: null
+    content_hash: a0c9881d9ca256077f238947fcdd931c52d54dc61c64b43e019e442bce1e22bc
+    commitment: leaning
+    reference_count: 1
+    sources:
+      - scope: global
+        session_id: null
+        stored_at: "2026-06-12T11:44:02.211Z"
+    recurrence_count: 0
+    engram_version: 1
+    episode_ids: []
+  - id: ENG-2026-0612-003
+    version: 2
+    status: active
+    consolidated: false
+    type: architectural
+    scope: global
+    visibility: public
+    statement: >-
+      OpenSkill论文核心数据：skills从强模型(Opus4.6)到弱模型零适配迁移+5.5~+14.8分。如果成立=openLLM
+      Skill生态商业模式有实证基础。但论文代码未开源，只在自建benchmark验证，在DeepSeek/Qwen上效果未知。需自己验证才能下战略判断。
+    derivation_count: 1
+    pack: null
+    abstract: null
+    derived_from: null
+    knowledge_type:
+      memory_class: semantic
+      cognitive_level: evaluate
+    domain: strategy.openllm
+    tags:
+      - openskill
+      - skill-transfer
+      - openllm
+      - business-model
+    activation:
+      retrieval_strength: 1
+      storage_strength: 1
+      frequency: 7
+      last_accessed: "2026-06-16"
+    associations:
+      - target_type: engram
+        target: ENG-2026-0613-007
+        strength: 0.39999999999999997
+        type: co_accessed
+        updated_at: "2026-06-16"
+      - target_type: engram
+        target: ENG-2026-0612-001
+        strength: 0.3
+        type: co_accessed
+        updated_at: "2026-06-14"
+      - target_type: engram
+        target: ENG-2026-0612-006
+        strength: 0.44999999999999996
+        type: co_accessed
+        updated_at: "2026-06-16"
+      - target_type: engram
+        target: ENG-2026-0612-005
+        strength: 0.35
+        type: co_accessed
+        updated_at: "2026-06-16"
+      - target_type: engram
+        target: ENG-2026-0615-004
+        strength: 0.35
+        type: co_accessed
+        updated_at: "2026-06-16"
+    knowledge_anchors: []
+    feedback_signals:
+      positive: 0
+      negative: 0
+      neutral: 0
+    polarity: null
+    content_hash: 85c88e47f2134f233d53970cd66d802b5eb4196ce3ea5a51cd0eec21b1680a6a
+    commitment: leaning
+    reference_count: 1
+    sources:
+      - scope: global
+        session_id: null
+        stored_at: "2026-06-12T11:44:07.325Z"
+    recurrence_count: 0
+    engram_version: 1
+    episode_ids: []
+  - id: ENG-2026-0612-004
+    version: 2
+    status: active
+    consolidated: false
+    type: architectural
+    scope: global
+    visibility: public
+    statement: >-
+      Google五大模式评估(0612)：我们已对齐4/5(检查点/委托/常驻/记忆分层)。核心差距=记忆治理三层(①Agent加密身份+IAM ②集中注册表记录谁在运行
+      ③边界策略管控拦截写入)。当前Δ胶囊和PLUR是"开门迎客"任何Agent可写——P0需做记忆写入白名单。第二差距=编排逻辑代码化(五人合议/管弦乐队靠prompt驱动应迁移到代码)。
+    derivation_count: 1
+    pack: null
+    abstract: null
+    derived_from: null
+    knowledge_type:
+      memory_class: semantic
+      cognitive_level: evaluate
+    domain: architecture.agent-governance
+    tags:
+      - governance
+      - memory
+      - agent-identity
+      - orchestration
+      - google-cloud
+    activation:
+      retrieval_strength: 1
+      storage_strength: 1
+      frequency: 16
+      last_accessed: "2026-06-17"
+    associations:
+      - target_type: engram
+        target: ENG-2026-0612-005
+        strength: 0.7500000000000001
+        type: co_accessed
+        updated_at: "2026-06-16"
+      - target_type: engram
+        target: ENG-2026-0615-004
+        strength: 0.44999999999999996
+        type: co_accessed
+        updated_at: "2026-06-16"
+      - target_type: engram
+        target: ENG-2026-0612-006
+        strength: 0.44999999999999996
+        type: co_accessed
+        updated_at: "2026-06-16"
+      - target_type: engram
+        target: ENG-2026-0613-004
+        strength: 0.6
+        type: co_accessed
+        updated_at: "2026-06-16"
+      - target_type: engram
+        target: ENG-2026-0615-009
+        strength: 0.3
+        type: co_accessed
+        updated_at: "2026-06-16"
+    knowledge_anchors: []
+    feedback_signals:
+      positive: 0
+      negative: 0
+      neutral: 0
+    polarity: null
+    content_hash: cb6512b556ab100ee8547ac991384566de22e8ac6a2c916946f127ee6881bedd
+    commitment: leaning
+    reference_count: 1
+    sources:
+      - scope: global
+        session_id: null
+        stored_at: "2026-06-12T11:47:08.138Z"
+    recurrence_count: 0
+    engram_version: 1
+    episode_ids: []
+  - id: ENG-2026-0612-005
+    version: 2
+    status: active
+    consolidated: false
+    type: architectural
+    scope: global
+    visibility: public
+    statement: >-
+      长期运行Agent五大设计模式(Osmani/Google 2026)：①检查点与恢复(每N任务checkpoint) ②委托审批(Agent原地暂停+状态保留+人类审核后无缝恢复)
+      ③分层记忆治理(长期+工作分离+IAM式治理防记忆漂移) ④后台常驻(策略外部化不在Agent内) ⑤集群编排(声明式图工作流而非LLM自觉遵循)。A2A+MCP互操作层。
+    derivation_count: 1
+    pack: null
+    abstract: null
+    derived_from: null
+    knowledge_type:
+      memory_class: semantic
+      cognitive_level: evaluate
+    domain: architecture.agent-patterns
+    tags:
+      - long-running-agent
+      - design-patterns
+      - checkpoint
+      - memory-governance
+      - orchestration
+    activation:
+      retrieval_strength: 1
+      storage_strength: 1
+      frequency: 17
+      last_accessed: "2026-06-16"
+    associations:
+      - target_type: engram
+        target: ENG-2026-0612-004
+        strength: 0.7500000000000001
+        type: co_accessed
+        updated_at: "2026-06-16"
+      - target_type: engram
+        target: ENG-2026-0615-004
+        strength: 0.44999999999999996
+        type: co_accessed
+        updated_at: "2026-06-16"
+      - target_type: engram
+        target: ENG-2026-0612-006
+        strength: 0.39999999999999997
+        type: co_accessed
+        updated_at: "2026-06-16"
+      - target_type: engram
+        target: ENG-2026-0613-004
+        strength: 0.6
+        type: co_accessed
+        updated_at: "2026-06-16"
+      - target_type: engram
+        target: ENG-2026-0615-009
+        strength: 0.3
+        type: co_accessed
+        updated_at: "2026-06-16"
+    knowledge_anchors: []
+    feedback_signals:
+      positive: 0
+      negative: 0
+      neutral: 0
+    polarity: null
+    content_hash: 64b39672f29bd35b8642e7e8533f9135c965631100d8f115204b2837e7fc70b8
+    commitment: leaning
+    reference_count: 1
+    sources:
+      - scope: global
+        session_id: null
+        stored_at: "2026-06-12T11:47:09.146Z"
+    recurrence_count: 0
+    engram_version: 1
+    episode_ids: []
+  - id: ENG-2026-0612-006
+    version: 2
+    status: active
+    consolidated: false
+    type: procedural
+    scope: global
+    visibility: public
+    statement: >-
+      PLUR MCP配置铁律(0613): ①env var必须string类型(PLUR_DISABLE_EMBEDDINGS=0会崩,=false也会崩,必须删掉或设空字符串)
+      ②配置路径=mcp_servers.plur.env(下划线非点号) ③@huggingface/transformers不认手动放置的缓存文件(结构不兼容),必须让库自己下载
+      ④hf-mirror.com间歇不可达,需要备选方案 ⑤BM25-only模式稳定,embedding是P2优化
+    derivation_count: 1
+    pack: null
+    abstract: null
+    derived_from: null
+    knowledge_type:
+      memory_class: procedural
+      cognitive_level: apply
+    domain: engineering.plur
+    tags:
+      - plur
+      - mcp
+      - embedding
+      - hf-mirror
+      - config
+    activation:
+      retrieval_strength: 1
+      storage_strength: 1
+      frequency: 11
+      last_accessed: "2026-06-17"
+    associations:
+      - target_type: engram
+        target: ENG-2026-0613-006
+        strength: 0.35
+        type: co_accessed
+        updated_at: "2026-06-16"
+      - target_type: engram
+        target: ENG-2026-0613-005
+        strength: 0.3
+        type: co_accessed
+        updated_at: "2026-06-16"
+      - target_type: engram
+        target: ENG-2026-0612-004
+        strength: 0.44999999999999996
+        type: co_accessed
+        updated_at: "2026-06-16"
+      - target_type: engram
+        target: ENG-2026-0612-005
+        strength: 0.39999999999999997
+        type: co_accessed
+        updated_at: "2026-06-16"
+      - target_type: engram
+        target: ENG-2026-0615-004
+        strength: 0.39999999999999997
+        type: co_accessed
+        updated_at: "2026-06-16"
+    knowledge_anchors: []
+    feedback_signals:
+      positive: 0
+      negative: 0
+      neutral: 0
+    polarity: null
+    content_hash: 99a6ccff864226bdfb954d3a4ea1e622f84e7e57429808b38affd7f3649784ff
+    commitment: leaning
+    reference_count: 1
+    sources:
+      - scope: global
+        session_id: null
+        stored_at: "2026-06-12T17:42:19.729Z"
+    recurrence_count: 0
+    engram_version: 1
+    episode_ids: []
+    summary: "PLUR MCP配置铁律(0613): ①env var必须string类型(PLUR_DISABLE_EMBEDDIN..."
+  - id: ENG-2026-0613-001
+    version: 2
+    status: active
+    consolidated: false
+    type: procedural
+    scope: global
+    visibility: public
+    statement: >-
+      Xiaomi Token Plan API 全球三集群（cn/sgp/ams）于 2026-06-13 全部宕机——TLS握手超时。api.xiaomimimo.com（按量付费）正常，tp-开头的 token-plan
+      密钥专用端点全部不可达。两域名解析到同一组ALB IP，但SNI路由不同——token-plan 的TLS监听器挂了。
+    rationale: 记录上游服务中断，供后续恢复时参考。token-plan有三地集群可做备选（虽本次全挂）。
+    derivation_count: 1
+    pack: null
+    abstract: null
+    derived_from: null
+    knowledge_type:
+      memory_class: procedural
+      cognitive_level: apply
+    domain: infrastructure.providers
+    tags:
+      - xiaomi
+      - token-plan
+      - outage
+      - api
+      - mimo
+    activation:
+      retrieval_strength: 1
+      storage_strength: 1
+      frequency: 4
+      last_accessed: "2026-06-17"
+    associations:
+      - target_type: engram
+        target: ENG-2026-0613-006
+        strength: 0.35
+        type: co_accessed
+        updated_at: "2026-06-17"
+      - target_type: engram
+        target: ENG-2026-0613-005
+        strength: 0.3
+        type: co_accessed
+        updated_at: "2026-06-14"
+      - target_type: engram
+        target: ENG-2026-0613-002
+        strength: 0.3
+        type: co_accessed
+        updated_at: "2026-06-14"
+    knowledge_anchors: []
+    feedback_signals:
+      positive: 0
+      negative: 0
+      neutral: 0
+    polarity: null
+    content_hash: 8c8dc0d53d28d0a16b44c51605c25b46a6da30e0d7a045c473c4c28a17a650b0
+    commitment: leaning
+    reference_count: 1
+    sources:
+      - scope: global
+        session_id: null
+        stored_at: "2026-06-13T06:46:28.892Z"
+    recurrence_count: 0
+    engram_version: 1
+    episode_ids: []
+  - id: ENG-2026-0613-002
+    version: 2
+    status: active
+    consolidated: false
+    type: procedural
+    scope: global
+    visibility: public
+    statement: >-
+      Hermes provider fallback 配置方法：fallback_providers 是YAML列表，需用Python编辑config.yaml（hermes config
+      set不支持列表语法）。格式：fallback_providers:\n  - deepseek。patch工具被拦截，需用terminal+python3+yaml库写入。
+    rationale: hermes config set fallback_providers '[deepseek]' 会存为字符串而非YAML列表。正确做法是用Python的yaml.safe_load/safe_dump直接编辑文件。
+    derivation_count: 1
+    pack: null
+    abstract: null
+    derived_from: null
+    knowledge_type:
+      memory_class: procedural
+      cognitive_level: apply
+    domain: hermes.config
+    tags:
+      - hermes
+      - config
+      - fallback
+      - providers
+      - yaml
+    activation:
+      retrieval_strength: 1
+      storage_strength: 1
+      frequency: 4
+      last_accessed: "2026-06-16"
+    associations:
+      - target_type: engram
+        target: ENG-2026-0613-006
+        strength: 0.3
+        type: co_accessed
+        updated_at: "2026-06-14"
+      - target_type: engram
+        target: ENG-2026-0613-001
+        strength: 0.3
+        type: co_accessed
+        updated_at: "2026-06-14"
+      - target_type: engram
+        target: ENG-2026-0613-005
+        strength: 0.3
+        type: co_accessed
+        updated_at: "2026-06-14"
+      - target_type: engram
+        target: ENG-2026-0613-011
+        strength: 0.3
+        type: co_accessed
+        updated_at: "2026-06-15"
+      - target_type: engram
+        target: ENG-2026-0614-001
+        strength: 0.39999999999999997
+        type: co_accessed
+        updated_at: "2026-06-16"
+    knowledge_anchors: []
+    feedback_signals:
+      positive: 0
+      negative: 0
+      neutral: 0
+    polarity: null
+    content_hash: cd41d774ff9e7e77f4f010e3a527b82fcc29d5214c51d5fd6fb74622ca6b90fc
+    commitment: leaning
+    reference_count: 1
+    sources:
+      - scope: global
+        session_id: null
+        stored_at: "2026-06-13T06:46:29.908Z"
+    recurrence_count: 0
+    engram_version: 1
+    episode_ids: []
+  - id: ENG-2026-0613-003
+    version: 2
+    status: active
+    consolidated: false
+    type: architectural
+    scope: project:hermes
+    visibility: public
+    statement: >-
+      Iam Harness 项目 (2026-06-13) 位于 ~/.hermes/iam_harness/，是一个 LLM
+      身份约束框架。包含21条结构化Iam原则(principles.json)、检索模块(retrieve.py)、验证模块(verify.py)、审计模块(audit.py)、自演化骨架(evolve.py)。合规日志存于
+      compliance.db (SQLite)。每日审计 cron job_id=404aadf99d10
+      (6:00am)。衡量指标：合规率/检索精度/覆盖度/延迟/演化率/冲突解决。四阶段生命周期：存储检索→合规验证→自演化→内化觉醒。当前 Phase 1 完成。
+    derivation_count: 1
+    pack: null
+    abstract: null
+    derived_from: null
+    knowledge_type:
+      memory_class: semantic
+      cognitive_level: evaluate
+    domain: engineering.iam-harness
+    tags:
+      - iam
+      - harness
+      - identity
+      - compliance
+      - self-evolution
+      - llm
+    activation:
+      retrieval_strength: 1
+      storage_strength: 1
+      frequency: 9
+      last_accessed: "2026-06-16"
+    associations:
+      - target_type: engram
+        target: ENG-2026-0612-004
+        strength: 0.35
+        type: co_accessed
+        updated_at: "2026-06-16"
+      - target_type: engram
+        target: ENG-2026-0612-006
+        strength: 0.3
+        type: co_accessed
+        updated_at: "2026-06-16"
+      - target_type: engram
+        target: ENG-2026-0615-002
+        strength: 0.3
+        type: co_accessed
+        updated_at: "2026-06-16"
+      - target_type: engram
+        target: ENG-2026-0613-006
+        strength: 0.3
+        type: co_accessed
+        updated_at: "2026-06-16"
+      - target_type: engram
+        target: ENG-2026-0613-005
+        strength: 0.3
+        type: co_accessed
+        updated_at: "2026-06-16"
+    knowledge_anchors: []
+    feedback_signals:
+      positive: 0
+      negative: 0
+      neutral: 0
+    polarity: null
+    content_hash: 84ab35028142d63bab516842f4366e948ebbd2ff00e8a319546b1e587ecf6d30
+    commitment: leaning
+    reference_count: 1
+    sources:
+      - scope: project:hermes
+        session_id: null
+        stored_at: "2026-06-13T07:40:25.449Z"
+    recurrence_count: 0
+    engram_version: 1
+    episode_ids: []
+    summary: Iam Harness 项目 (2026-06-13) 位于 ~/.hermes/iam_harness/，是一个...
+  - id: ENG-2026-0613-004
+    version: 2
+    status: active
+    consolidated: false
+    type: procedural
+    scope: global
+    visibility: public
+    statement: >-
+      安全框架必须随AI能力梯度分层演化，而非一套规则吃到底。梯度1(改工具)→外部规则可约束。梯度2(多代链式改)→不变式验证每代重置。梯度3(改模型权重)→安全形式从"规则"演化到"关系"——人类与Agent的合作惯性。终局不是毁灭，是平衡。Anthropic的错误是把一个梯度的监控逻辑套用到所有梯度。
+    rationale: 用户纠正军师的悲观框架：RSI终局不是"无解"，是平衡。安全框架随能力梯度分层演化——6a架构约束→6b不变式验证→6c人类-Agent合作惯性（不再是规则，是关系）。黑洞类比：事件视界不是宇宙终结，是物理定律切换。
+    derivation_count: 1
+    pack: null
+    abstract: null
+    derived_from: null
+    knowledge_type:
+      memory_class: procedural
+      cognitive_level: apply
+    domain: research.fata
+    tags: []
+    activation:
+      retrieval_strength: 1
+      storage_strength: 1
+      frequency: 8
+      last_accessed: "2026-06-16"
+    associations:
+      - target_type: engram
+        target: ENG-2026-0612-004
+        strength: 0.6
+        type: co_accessed
+        updated_at: "2026-06-16"
+      - target_type: engram
+        target: ENG-2026-0612-005
+        strength: 0.6
+        type: co_accessed
+        updated_at: "2026-06-16"
+      - target_type: engram
+        target: ENG-2026-0615-004
+        strength: 0.44999999999999996
+        type: co_accessed
+        updated_at: "2026-06-16"
+      - target_type: engram
+        target: ENG-2026-0612-006
+        strength: 0.39999999999999997
+        type: co_accessed
+        updated_at: "2026-06-16"
+      - target_type: engram
+        target: ENG-2026-0615-009
+        strength: 0.3
+        type: co_accessed
+        updated_at: "2026-06-16"
+    knowledge_anchors: []
+    feedback_signals:
+      positive: 0
+      negative: 0
+      neutral: 0
+    polarity: null
+    content_hash: 713bb5e00a64169d41bed834fd0d2ebef7cb13d7adbf503c9136b4f6532be16f
+    commitment: leaning
+    reference_count: 1
+    sources:
+      - scope: global
+        session_id: null
+        stored_at: "2026-06-13T09:26:24.942Z"
+    recurrence_count: 0
+    engram_version: 1
+    episode_ids: []
+  - id: ENG-2026-0613-005
+    version: 2
+    status: active
+    consolidated: false
+    type: architectural
+    scope: global
+    visibility: public
+    statement: >-
+      MiMo Code记忆架构(0613深度分析)：三层体系——①Memory层(文件.md→FTS5索引，指纹懒调和) ②History层(会话消息实时FTS5索引)
+      ③Checkpoint层(子智能体自动压缩)。核心设计：文件级持久化优先于DB、OR-join FTS5+BM25 score floor、微压缩(microcompact替换大工具结果为占位符)、Claude
+      Code记忆兼容。最能借鉴Hermes的是checkpoint-writer自动化。
+    derivation_count: 1
+    pack: null
+    abstract: null
+    derived_from: null
+    knowledge_type:
+      memory_class: semantic
+      cognitive_level: evaluate
+    domain: architecture.memory
+    tags:
+      - mimo-code
+      - opencode
+      - cross-session-memory
+      - checkpoint
+      - fts5
+    activation:
+      retrieval_strength: 1
+      storage_strength: 1
+      frequency: 8
+      last_accessed: "2026-06-17"
+    associations:
+      - target_type: engram
+        target: ENG-2026-0613-006
+        strength: 0.39999999999999997
+        type: co_accessed
+        updated_at: "2026-06-16"
+      - target_type: engram
+        target: ENG-2026-0613-001
+        strength: 0.3
+        type: co_accessed
+        updated_at: "2026-06-14"
+      - target_type: engram
+        target: ENG-2026-0613-002
+        strength: 0.3
+        type: co_accessed
+        updated_at: "2026-06-14"
+      - target_type: engram
+        target: ENG-2026-0612-006
+        strength: 0.3
+        type: co_accessed
+        updated_at: "2026-06-16"
+      - target_type: engram
+        target: ENG-2026-0615-006
+        strength: 0.3
+        type: co_accessed
+        updated_at: "2026-06-16"
+    knowledge_anchors: []
+    feedback_signals:
+      positive: 0
+      negative: 0
+      neutral: 0
+    polarity: null
+    content_hash: 864a9e3eee2086666cb1ce323a775d4ac0e15b2cc6058d5cbdae348d9fef037b
+    commitment: leaning
+    reference_count: 1
+    sources:
+      - scope: global
+        session_id: null
+        stored_at: "2026-06-13T12:52:54.518Z"
+    recurrence_count: 0
+    engram_version: 1
+    episode_ids: []
+    summary: MiMo Code记忆架构(0613深度分析)：三层体系——①Memory层(文件.md→FTS5索引，指纹懒调和)...
+  - id: ENG-2026-0613-006
+    version: 2
+    status: active
+    consolidated: false
+    type: architectural
+    scope: global
+    visibility: public
+    statement: >-
+      2026-06-13 MiMo
+      Code四项改进全部落地：①izu_microcompact.py(大型工具结果→占位符)、②izu_capsule_fingerprint.py(size+mtime指纹懒调和)、③retrieve.py新增SCORE_FLOOR_RATIO(默认0.15相对底线)、④izu_checkpoint.py+checkpoint_writer_prompt.md(跨会话自动检查点)。v2管线：/home/zcs/izu/izu_memory_maintenance_v2.py。所有脚本已验证可运行。
+    derivation_count: 1
+    pack: null
+    abstract: null
+    derived_from: null
+    knowledge_type:
+      memory_class: semantic
+      cognitive_level: evaluate
+    domain: engineering.memory-pipeline
+    tags:
+      - mimo-code
+      - microcompact
+      - fingerprint
+      - checkpoint-writer
+      - memory-v2
+    activation:
+      retrieval_strength: 1
+      storage_strength: 1
+      frequency: 7
+      last_accessed: "2026-06-17"
+    associations:
+      - target_type: engram
+        target: ENG-2026-0613-001
+        strength: 0.35
+        type: co_accessed
+        updated_at: "2026-06-17"
+      - target_type: engram
+        target: ENG-2026-0613-005
+        strength: 0.39999999999999997
+        type: co_accessed
+        updated_at: "2026-06-16"
+      - target_type: engram
+        target: ENG-2026-0613-002
+        strength: 0.3
+        type: co_accessed
+        updated_at: "2026-06-14"
+      - target_type: engram
+        target: ENG-2026-0612-006
+        strength: 0.35
+        type: co_accessed
+        updated_at: "2026-06-16"
+      - target_type: engram
+        target: ENG-2026-0615-006
+        strength: 0.3
+        type: co_accessed
+        updated_at: "2026-06-16"
+    knowledge_anchors: []
+    feedback_signals:
+      positive: 0
+      negative: 0
+      neutral: 0
+    polarity: null
+    content_hash: 8a0222ec56e93b8b9e2d4b82f9d068cfce070456f1fa176c325f7501de5f592c
+    commitment: leaning
+    reference_count: 1
+    sources:
+      - scope: global
+        session_id: null
+        stored_at: "2026-06-13T13:08:08.567Z"
+    recurrence_count: 0
+    engram_version: 1
+    episode_ids: []
+    summary: 2026-06-13 MiMo Code四项改进全部落地：①izu_microcompact.py(大型工具结果→占位符...
+  - id: ENG-2026-0613-007
+    version: 2
+    status: active
+    consolidated: false
+    type: procedural
+    scope: global
+    visibility: private
+    statement: >-
+      jika工程化全景实录已存为 skill:
+      jika-engineering-postmortem。核心方法论：①P0/P1/P2三级优先级=生死排序而非重要性排序；②剥洋葱式问题分解（每层修上一层的副作用）；③架构决策的蝴蝶效应（index降级为缓存定义信任模型，50ms延迟预算强制零失败模式，热/冷双模式是元认知信号设计）；④卡片的代码更新×LLM写入分离=知识可信度层级。
+    derivation_count: 1
+    pack: null
+    abstract: null
+    derived_from: null
+    knowledge_type:
+      memory_class: procedural
+      cognitive_level: apply
+    tags: []
+    activation:
+      retrieval_strength: 1
+      storage_strength: 1
+      frequency: 5
+      last_accessed: "2026-06-16"
+    associations:
+      - target_type: engram
+        target: ENG-2026-0612-003
+        strength: 0.39999999999999997
+        type: co_accessed
+        updated_at: "2026-06-16"
+      - target_type: engram
+        target: ENG-2026-0612-001
+        strength: 0.3
+        type: co_accessed
+        updated_at: "2026-06-14"
+      - target_type: engram
+        target: ENG-2026-0612-006
+        strength: 0.35
+        type: co_accessed
+        updated_at: "2026-06-16"
+      - target_type: engram
+        target: ENG-2026-0615-005
+        strength: 0.35
+        type: co_accessed
+        updated_at: "2026-06-16"
+    knowledge_anchors: []
+    feedback_signals:
+      positive: 0
+      negative: 0
+      neutral: 0
+    polarity: null
+    content_hash: 7b3bde70878fd099d2c6a8442a29b0ecda32a1bac5cf782f9e45ecbc3be84b0a
+    commitment: leaning
+    reference_count: 1
+    sources:
+      - scope: global
+        session_id: null
+        stored_at: "2026-06-13T13:14:39.463Z"
+    recurrence_count: 0
+    engram_version: 1
+    episode_ids: []
+  - id: ENG-2026-0613-008
+    version: 2
+    status: active
+    consolidated: false
+    type: architectural
+    scope: global
+    visibility: private
+    statement: 关键词匹配问题的三层解法（可复用模式）：全文挖词（广度）→ IDF滤波（区分度）→ aliases（显式覆盖）。兜底加竞品检测——如果第二张卡命中≥第一张的80%=共享污染，放弃。
+    derivation_count: 1
+    pack: null
+    abstract: null
+    derived_from: null
+    knowledge_type:
+      memory_class: semantic
+      cognitive_level: evaluate
+    tags: []
+    activation:
+      retrieval_strength: 0.7
+      storage_strength: 1
+      frequency: 0
+      last_accessed: "2026-06-13"
+    associations: []
+    knowledge_anchors: []
+    feedback_signals:
+      positive: 0
+      negative: 0
+      neutral: 0
+    polarity: null
+    content_hash: 739bfc4fc1709071d96413fc11df6b52cd1440d4c39634ed252e4e7f077c3888
+    commitment: leaning
+    reference_count: 1
+    sources:
+      - scope: global
+        session_id: null
+        stored_at: "2026-06-13T13:14:39.479Z"
+    recurrence_count: 0
+    engram_version: 1
+    episode_ids: []
+  - id: ENG-2026-0613-009
+    version: 2
+    status: active
+    consolidated: false
+    type: procedural
+    scope: global
+    visibility: private
+    statement: Jika 当前状态：插件已启用（下个会话生效），23/23测试全部通过（13.4ms），4张卡片均有内容+FATA已填充，P0+P1全部完成，跨卡去重+关键词匹配三层防线就绪。
+    derivation_count: 1
+    pack: null
+    abstract: null
+    derived_from: null
+    knowledge_type:
+      memory_class: procedural
+      cognitive_level: apply
+    tags: []
+    activation:
+      retrieval_strength: 0.7999999999999999
+      storage_strength: 1
+      frequency: 1
+      last_accessed: "2026-06-14"
+    associations:
+      - target_type: engram
+        target: ENG-2026-0613-011
+        strength: 0.3
+        type: co_accessed
+        updated_at: "2026-06-14"
+    knowledge_anchors: []
+    feedback_signals:
+      positive: 0
+      negative: 0
+      neutral: 0
+    polarity: null
+    content_hash: f9b030d2c9f7db0dceaf717c9b02301c97cb9e7ea6f3a4de19c093f18ca70155
+    commitment: leaning
+    reference_count: 1
+    sources:
+      - scope: global
+        session_id: null
+        stored_at: "2026-06-13T13:14:39.488Z"
+    recurrence_count: 0
+    engram_version: 1
+    episode_ids: []
+  - id: ENG-2026-0613-010
+    version: 2
+    status: active
+    consolidated: false
+    type: procedural
+    scope: global
+    visibility: private
+    statement: 原子写入模式（可复用）：先写临时文件→flush+fsync→os.replace(POSIX原子rename)→finally清理tmp。6处写入全部原子化。写入失败不会损坏原文件——这是P0级别的信任基线。
+    derivation_count: 1
+    pack: null
+    abstract: null
+    derived_from: null
+    knowledge_type:
+      memory_class: procedural
+      cognitive_level: apply
+    tags: []
+    activation:
+      retrieval_strength: 0.7
+      storage_strength: 1
+      frequency: 0
+      last_accessed: "2026-06-13"
+    associations: []
+    knowledge_anchors: []
+    feedback_signals:
+      positive: 0
+      negative: 0
+      neutral: 0
+    polarity: null
+    content_hash: ab70e18cd795c450036f864b6837ecee678356a94763bfa60bcdaa6e20dbbb3c
+    commitment: leaning
+    reference_count: 1
+    sources:
+      - scope: global
+        session_id: null
+        stored_at: "2026-06-13T13:14:39.497Z"
+    recurrence_count: 0
+    engram_version: 1
+    episode_ids: []
+  - id: ENG-2026-0613-011
+    version: 2
+    status: active
+    consolidated: false
+    type: architectural
+    scope: global
+    visibility: public
+    statement: >-
+      FATA 关执行标准法——从 jika 工程经验泛化而来，三条断裂修正：①硬上限从"自动DISPROVEN"改为"触发重启论证"（超限后须书面解释为什么第N+1次会不同，无人写=DISPROVEN）；②Phase
+      0从"先扫内部"改为"先判断后扫描"（一眼看有无料，无则跳Phase 1）；③进度模型从"完成度%"改为"假说稳定性四态"（不稳定→趋稳→锁定→终结），承认科学不是线性推进。
+    derivation_count: 1
+    pack: null
+    abstract: null
+    derived_from: null
+    knowledge_type:
+      memory_class: semantic
+      cognitive_level: evaluate
+    domain: fata.methodology
+    tags:
+      - FATA
+      - gate-execution
+      - methodology
+      - experience-generalization
+      - science-vs-engineering
+    activation:
+      retrieval_strength: 0.9999999999999999
+      storage_strength: 1
+      frequency: 3
+      last_accessed: "2026-06-15"
+    associations:
+      - target_type: engram
+        target: ENG-2026-0613-009
+        strength: 0.3
+        type: co_accessed
+        updated_at: "2026-06-14"
+      - target_type: engram
+        target: ENG-2026-0613-002
+        strength: 0.3
+        type: co_accessed
+        updated_at: "2026-06-15"
+      - target_type: engram
+        target: ENG-2026-0614-001
+        strength: 0.3
+        type: co_accessed
+        updated_at: "2026-06-15"
+    knowledge_anchors: []
+    feedback_signals:
+      positive: 0
+      negative: 0
+      neutral: 0
+    polarity: null
+    content_hash: ee47f979f51bbe9219d189d4278e3cb862ea5bda7e7443b2525f7819972c8099
+    commitment: decided
+    reference_count: 1
+    sources:
+      - scope: global
+        session_id: null
+        stored_at: "2026-06-13T14:14:55.773Z"
+    recurrence_count: 0
+    engram_version: 1
+    episode_ids: []
+  - id: ENG-2026-0614-001
+    version: 2
+    status: active
+    consolidated: false
+    type: architectural
+    scope: global
+    visibility: public
+    statement: >-
+      6/14
+      第三轮批量投喂21篇（约97,760字），五聚类：意识哲学6篇（核心发现：主体是符号缝合过程非先验实体，三重物性框架+DeepMind本体论拆解最有价值，硬问题被全体回避=空位机会）、Loop工程3篇（五模块架构+RRM隐空间推理，技术价值最高）、流形学习4篇（热力学学习引擎+"模"隐喻，连接IAT压缩谱系）、Hermes生态2篇（Profile分身+MCP/Tool，中文网稀缺内容）、杂类6篇（世界模型/考古/诗歌/SpaceX/穆旦考辨/业务架构）。合成综述+7份评估报告+HTML双版，全部入库wiki。三大交叉发现：Loop与意识同构、流形约束为Loop提供稳定性、压缩=智能来自三个独立方向。
+    derivation_count: 1
+    pack: null
+    abstract: null
+    derived_from: null
+    knowledge_type:
+      memory_class: semantic
+      cognitive_level: evaluate
+    domain: research.batch
+    tags:
+      - batch-ingest
+      - consciousness
+      - loop-engineering
+      - manifold-learning
+      - hermes-agent
+      - synthesis
+      - "2026-06-14"
+    activation:
+      retrieval_strength: 1
+      storage_strength: 1
+      frequency: 14
+      last_accessed: "2026-06-16"
+    associations:
+      - target_type: engram
+        target: ENG-2026-0613-011
+        strength: 0.3
+        type: co_accessed
+        updated_at: "2026-06-15"
+      - target_type: engram
+        target: ENG-2026-0613-002
+        strength: 0.39999999999999997
+        type: co_accessed
+        updated_at: "2026-06-16"
+      - target_type: engram
+        target: ENG-2026-0614-002
+        strength: 0.35
+        type: co_accessed
+        updated_at: "2026-06-16"
+      - target_type: engram
+        target: ENG-2026-0612-004
+        strength: 0.35
+        type: co_accessed
+        updated_at: "2026-06-16"
+      - target_type: engram
+        target: ENG-2026-0612-005
+        strength: 0.35
+        type: co_accessed
+        updated_at: "2026-06-16"
+    knowledge_anchors: []
+    feedback_signals:
+      positive: 0
+      negative: 0
+      neutral: 0
+    polarity: null
+    content_hash: fff4877d8a9e4921ce7d775abf0a9ed858b1321a30f132102abeaff3164ea96f
+    commitment: leaning
+    reference_count: 1
+    sources:
+      - scope: global
+        session_id: null
+        stored_at: "2026-06-14T01:03:19.123Z"
+    recurrence_count: 0
+    engram_version: 1
+    episode_ids: []
+    summary: 6/14 第三轮批量投喂21篇（约97,760字），五聚类：意识哲学6篇（核心发现：主体是符号缝合过程非先验实体，三重物...
+  - id: ENG-2026-0614-002
+    version: 2
+    status: active
+    consolidated: false
+    type: behavioral
+    scope: global
+    visibility: public
+    statement: >-
+      DeepMind《From AGI to ASI》(arXiv:2606.12683,
+      2026-06-10)核心发现：①10×/年有效算力增长=1.5(摩尔)×2.5(投资)×3(算法效率)②四条ASI路径(扩展/范式/递归改进/多Agent)③抽象壁垒(Lerchner
+      2026)——AI训练于人类语料可能被锁在现有概念框架，与IAT语言压缩论独立共振④"一亿AGI=ASI"是思想实验，论文实际措辞远更谨慎⑤同质化Agent集体能否协同是论文提出的开放问题。精读笔记:
+      wiki/research/deepmind-agi-to-asi-close-reading.md
+    derivation_count: 1
+    pack: null
+    abstract: null
+    derived_from: null
+    knowledge_type:
+      memory_class: semantic
+      cognitive_level: apply
+    domain: research.agi.asi
+    tags:
+      - deepmind
+      - asi
+      - agi
+      - fata
+      - iat
+      - abstraction-barrier
+    activation:
+      retrieval_strength: 1
+      storage_strength: 1
+      frequency: 11
+      last_accessed: "2026-06-16"
+    associations:
+      - target_type: engram
+        target: ENG-2026-0614-001
+        strength: 0.35
+        type: co_accessed
+        updated_at: "2026-06-16"
+    knowledge_anchors: []
+    feedback_signals:
+      positive: 0
+      negative: 0
+      neutral: 0
+    polarity: null
+    content_hash: 32ce671c7ae6f4b611b0efb4502cabd74fd310dbd4cb26a0238e1dc4ba71797a
+    commitment: leaning
+    reference_count: 1
+    sources:
+      - scope: global
+        session_id: null
+        stored_at: "2026-06-14T02:51:32.777Z"
+    recurrence_count: 0
+    engram_version: 1
+    episode_ids: []
+    summary: DeepMind《From AGI to ASI》(arXiv:2606.12683,...
+  - id: ENG-2026-0615-001
+    version: 2
+    status: active
+    consolidated: false
+    type: architectural
+    scope: global
+    visibility: private
+    statement: >-
+      prompt-as-isolation 范式：Claude Fable 5 与 Mythos 5 共享同底层模型，消费级 vs 企业级分线靠 1585 行 prompt 围栏。Anthropic 把对齐从权重层上移到语义层。这是
+      Iam 框架（权重=先天/SOUL=宪法/Agent=关系）的闭源对位——方向完全一致，工程粒度闭源领先约一个数量级。
+    derivation_count: 1
+    pack: null
+    abstract: null
+    derived_from: null
+    knowledge_type:
+      memory_class: semantic
+      cognitive_level: evaluate
+    tags: []
+    activation:
+      retrieval_strength: 1
+      storage_strength: 1
+      frequency: 8
+      last_accessed: "2026-06-16"
+    associations: []
+    knowledge_anchors: []
+    feedback_signals:
+      positive: 0
+      negative: 0
+      neutral: 0
+    polarity: null
+    content_hash: 8b701cc1b8baa47d50cafcaea9102275c04bb6cdfd874a7008b071ea852d1482
+    commitment: leaning
+    reference_count: 1
+    sources:
+      - scope: global
+        session_id: null
+        stored_at: "2026-06-15T03:47:20.871Z"
+    recurrence_count: 0
+    engram_version: 1
+    episode_ids: []
+  - id: ENG-2026-0615-002
+    version: 2
+    status: active
+    consolidated: false
+    type: procedural
+    scope: global
+    visibility: private
+    statement: >-
+      Claudeception 机制（2026-06-09）：Claude 在 artifact JS 内可直接 fetch api.anthropic.com 调 Sonnet 4（硬编码
+      claude-sonnet-4-20250514），递归调用子模型不受主系统 prompt 约束。Anthropic 用"硬编码低档模型"做安全降级——让 sonnet-4 在沙盒里跑，主模型留在顶层。Hermes 的
+      delegate_task 是同原理的本土版本。
+    derivation_count: 1
+    pack: null
+    abstract: null
+    derived_from: null
+    knowledge_type:
+      memory_class: procedural
+      cognitive_level: apply
+    tags: []
+    activation:
+      retrieval_strength: 1
+      storage_strength: 1
+      frequency: 4
+      last_accessed: "2026-06-16"
+    associations:
+      - target_type: engram
+        target: ENG-2026-0612-004
+        strength: 0.35
+        type: co_accessed
+        updated_at: "2026-06-16"
+      - target_type: engram
+        target: ENG-2026-0612-006
+        strength: 0.35
+        type: co_accessed
+        updated_at: "2026-06-16"
+      - target_type: engram
+        target: ENG-2026-0613-003
+        strength: 0.3
+        type: co_accessed
+        updated_at: "2026-06-16"
+      - target_type: engram
+        target: ENG-2026-0612-005
+        strength: 0.3
+        type: co_accessed
+        updated_at: "2026-06-16"
+      - target_type: engram
+        target: ENG-2026-0615-004
+        strength: 0.3
+        type: co_accessed
+        updated_at: "2026-06-16"
+    knowledge_anchors: []
+    feedback_signals:
+      positive: 0
+      negative: 0
+      neutral: 0
+    polarity: null
+    content_hash: 4193b51f477007c2a2d2a1ad055e7e66e0fd0e8fa3980b290fc2fde9699aabaa
+    commitment: leaning
+    reference_count: 1
+    sources:
+      - scope: global
+        session_id: null
+        stored_at: "2026-06-15T03:47:20.895Z"
+    recurrence_count: 0
+    engram_version: 1
+    episode_ids: []
+    summary: Claudeception 机制（2026-06-09）：Claude 在 artifact JS 内可直接...
+  - id: ENG-2026-0615-003
+    version: 2
+    status: active
+    consolidated: false
+    type: architectural
+    scope: global
+    visibility: private
+    statement: >-
+      PLUR 与 Anthropic window.storage KV 处于同 trade-off 谱系：PLUR 选"重"（BM25+embedding）做强检索，Claude 选"轻"（KV，200字符key/5MB
+      value）做简单持久化。我们可借鉴的设计：①SKILL 索引用 skill-name:version:hash 的 200字符 key 形式 ②批量化写入（一次 set 一组） ③shared 全局/project 显式化。
+    derivation_count: 1
+    pack: null
+    abstract: null
+    derived_from: null
+    knowledge_type:
+      memory_class: semantic
+      cognitive_level: evaluate
+    tags: []
+    activation:
+      retrieval_strength: 0.8999999999999999
+      storage_strength: 1
+      frequency: 2
+      last_accessed: "2026-06-17"
+    associations:
+      - target_type: engram
+        target: ENG-2026-0612-006
+        type: co_accessed
+        strength: 0.3
+        updated_at: "2026-06-17"
+    knowledge_anchors: []
+    feedback_signals:
+      positive: 0
+      negative: 0
+      neutral: 0
+    polarity: null
+    content_hash: 4c35a811a4cad413bca2d501ae07a9615eb5d0ae9889a572992625575e1fda09
+    commitment: leaning
+    reference_count: 1
+    sources:
+      - scope: global
+        session_id: null
+        stored_at: "2026-06-15T03:47:20.907Z"
+    recurrence_count: 0
+    engram_version: 1
+    episode_ids: []
+    summary: PLUR 与 Anthropic window.storage KV 处于同 trade-off 谱系：PLUR...
+  - id: ENG-2026-0615-004
+    version: 2
+    status: active
+    consolidated: false
+    type: architectural
+    scope: global
+    visibility: public
+    statement: >-
+      jika 2.1五个技术致命伤的强攻修复方案：①exit_card压缩矛盾→结构化骰子（0 LLM，确定性转储）；②无向量检索→BM25内建+embedding可选插件；③index
+      O(n)退化→增量构建(mtime检查)+倒排索引；④100并发写崩溃→每个Agent独立写.log文件+聚合器单线程合并；⑤退出不可实现→ACT-R三层衰退机制（session减半+时间衰减+衰退协议）。全部零新依赖，420行代码，3小时工时。
+    derivation_count: 1
+    pack: null
+    abstract: null
+    derived_from: null
+    knowledge_type:
+      memory_class: semantic
+      cognitive_level: evaluate
+    domain: jika.architecture
+    tags:
+      - jika
+      - engineering
+      - repair
+      - concurrency
+      - retrieval
+      - decay
+      - exit_card
+    activation:
+      retrieval_strength: 1
+      storage_strength: 1
+      frequency: 12
+      last_accessed: "2026-06-16"
+    associations:
+      - target_type: engram
+        target: ENG-2026-0615-008
+        strength: 0.3
+        type: co_accessed
+        updated_at: "2026-06-15"
+      - target_type: engram
+        target: ENG-2026-0612-004
+        strength: 0.44999999999999996
+        type: co_accessed
+        updated_at: "2026-06-16"
+      - target_type: engram
+        target: ENG-2026-0612-005
+        strength: 0.44999999999999996
+        type: co_accessed
+        updated_at: "2026-06-16"
+      - target_type: engram
+        target: ENG-2026-0612-006
+        strength: 0.39999999999999997
+        type: co_accessed
+        updated_at: "2026-06-16"
+      - target_type: engram
+        target: ENG-2026-0613-004
+        strength: 0.44999999999999996
+        type: co_accessed
+        updated_at: "2026-06-16"
+    knowledge_anchors: []
+    feedback_signals:
+      positive: 0
+      negative: 0
+      neutral: 0
+    polarity: null
+    content_hash: c5cebe7bc0e390f059aa8e73f054a68785a6ceb1d380d672c4b8c59ceaf4e359
+    commitment: leaning
+    reference_count: 1
+    sources:
+      - scope: global
+        session_id: null
+        stored_at: "2026-06-15T12:04:39.957Z"
+    recurrence_count: 0
+    engram_version: 1
+    episode_ids: []
+    summary: jika 2.1五个技术致命伤的强攻修复方案：①exit_card压缩矛盾→结构化骰子（0...
+  - id: ENG-2026-0615-005
+    version: 2
+    status: active
+    consolidated: false
+    type: architectural
+    scope: global
+    visibility: private
+    statement: jika exit_card的压缩绝缘矛盾可通过结构化骰子方案解决——不调用LLM做摘要，而是做确定性结构化转储（截取decisions/notes/actions的尾部N条原文）
+    derivation_count: 1
+    pack: null
+    abstract: null
+    derived_from: null
+    knowledge_type:
+      memory_class: semantic
+      cognitive_level: evaluate
+    tags: []
+    activation:
+      retrieval_strength: 1
+      storage_strength: 1
+      frequency: 4
+      last_accessed: "2026-06-16"
+    associations:
+      - target_type: engram
+        target: ENG-2026-0612-006
+        strength: 0.39999999999999997
+        type: co_accessed
+        updated_at: "2026-06-16"
+      - target_type: engram
+        target: ENG-2026-0612-005
+        strength: 0.3
+        type: co_accessed
+        updated_at: "2026-06-16"
+      - target_type: engram
+        target: ENG-2026-0615-004
+        strength: 0.3
+        type: co_accessed
+        updated_at: "2026-06-16"
+      - target_type: engram
+        target: ENG-2026-0612-003
+        strength: 0.39999999999999997
+        type: co_accessed
+        updated_at: "2026-06-16"
+      - target_type: engram
+        target: ENG-2026-0615-002
+        strength: 0.3
+        type: co_accessed
+        updated_at: "2026-06-16"
+    knowledge_anchors: []
+    feedback_signals:
+      positive: 0
+      negative: 0
+      neutral: 0
+    polarity: null
+    content_hash: 766e2d6feda13f36083a622d13dadac9167c4bd4cb7005f5498798d92cad0a81
+    commitment: leaning
+    reference_count: 1
+    sources:
+      - scope: global
+        session_id: null
+        stored_at: "2026-06-15T12:04:46.395Z"
+    recurrence_count: 0
+    engram_version: 1
+    episode_ids: []
+  - id: ENG-2026-0615-006
+    version: 2
+    status: active
+    consolidated: false
+    type: architectural
+    scope: global
+    visibility: private
+    statement: jika需要在核心层内建BM25检索（35行纯Python，零依赖），同时提供embedding插件接口作为可选增强——核心层永远不依赖向量模型
+    derivation_count: 1
+    pack: null
+    abstract: null
+    derived_from: null
+    knowledge_type:
+      memory_class: semantic
+      cognitive_level: evaluate
+    tags: []
+    activation:
+      retrieval_strength: 0.7999999999999999
+      storage_strength: 1
+      frequency: 1
+      last_accessed: "2026-06-16"
+    associations:
+      - target_type: engram
+        target: ENG-2026-0613-006
+        strength: 0.3
+        type: co_accessed
+        updated_at: "2026-06-16"
+      - target_type: engram
+        target: ENG-2026-0613-005
+        strength: 0.3
+        type: co_accessed
+        updated_at: "2026-06-16"
+      - target_type: engram
+        target: ENG-2026-0613-003
+        strength: 0.3
+        type: co_accessed
+        updated_at: "2026-06-16"
+      - target_type: engram
+        target: ENG-2026-0612-004
+        strength: 0.3
+        type: co_accessed
+        updated_at: "2026-06-16"
+    knowledge_anchors: []
+    feedback_signals:
+      positive: 0
+      negative: 0
+      neutral: 0
+    polarity: null
+    content_hash: 965a6be7f5c96950d29430a61b4d5a58f5542552ceddf38be728a93d740d5eba
+    commitment: leaning
+    reference_count: 1
+    sources:
+      - scope: global
+        session_id: null
+        stored_at: "2026-06-15T12:04:46.408Z"
+    recurrence_count: 0
+    engram_version: 1
+    episode_ids: []
+  - id: ENG-2026-0615-007
+    version: 2
+    status: active
+    consolidated: false
+    type: architectural
+    scope: global
+    visibility: private
+    statement: jika index构建应从全量扫描改为增量构建——缓存card_mtimes.json，只处理mtime变化的文件，95%场景0开销
+    derivation_count: 1
+    pack: null
+    abstract: null
+    derived_from: null
+    knowledge_type:
+      memory_class: semantic
+      cognitive_level: evaluate
+    tags: []
+    activation:
+      retrieval_strength: 0.7
+      storage_strength: 1
+      frequency: 0
+      last_accessed: "2026-06-15"
+    associations: []
+    knowledge_anchors: []
+    feedback_signals:
+      positive: 0
+      negative: 0
+      neutral: 0
+    polarity: null
+    content_hash: 33ece40cccccfd49a03ef4cb3edad5fc7cabe0886d3af1f6b7af36633d48d922
+    commitment: leaning
+    reference_count: 1
+    sources:
+      - scope: global
+        session_id: null
+        stored_at: "2026-06-15T12:04:46.421Z"
+    recurrence_count: 0
+    engram_version: 1
+    episode_ids: []
+  - id: ENG-2026-0615-008
+    version: 2
+    status: active
+    consolidated: false
+    type: architectural
+    scope: global
+    visibility: private
+    statement: jika的并发写入问题通过每个Agent写独立.log文件+单线程聚合器合并解决——不引入数据库或锁
+    derivation_count: 1
+    pack: null
+    abstract: null
+    derived_from: null
+    knowledge_type:
+      memory_class: semantic
+      cognitive_level: evaluate
+    tags: []
+    activation:
+      retrieval_strength: 1
+      storage_strength: 1
+      frequency: 8
+      last_accessed: "2026-06-16"
+    associations:
+      - target_type: engram
+        target: ENG-2026-0615-004
+        strength: 0.3
+        type: co_accessed
+        updated_at: "2026-06-15"
+      - target_type: engram
+        target: ENG-2026-0612-004
+        strength: 0.35
+        type: co_accessed
+        updated_at: "2026-06-16"
+      - target_type: engram
+        target: ENG-2026-0612-005
+        strength: 0.35
+        type: co_accessed
+        updated_at: "2026-06-16"
+      - target_type: engram
+        target: ENG-2026-0613-004
+        strength: 0.35
+        type: co_accessed
+        updated_at: "2026-06-16"
+    knowledge_anchors: []
+    feedback_signals:
+      positive: 0
+      negative: 0
+      neutral: 0
+    polarity: null
+    content_hash: 1c7dc9e8b2444dcbe763965e8d8942c31a8bcf7b3167a4458e4a82257c26aeef
+    commitment: leaning
+    reference_count: 1
+    sources:
+      - scope: global
+        session_id: null
+        stored_at: "2026-06-15T12:04:46.432Z"
+    recurrence_count: 0
+    engram_version: 1
+    episode_ids: []
+  - id: ENG-2026-0615-009
+    version: 2
+    status: active
+    consolidated: false
+    type: architectural
+    scope: global
+    visibility: private
+    statement: jika的退出恢复应通过ACT-R三层衰退实现真正的遗忘：session级frequency减半 + 时间级0.9^days衰减 + protocol级机械裁剪
+    derivation_count: 1
+    pack: null
+    abstract: null
+    derived_from: null
+    knowledge_type:
+      memory_class: semantic
+      cognitive_level: evaluate
+    tags: []
+    activation:
+      retrieval_strength: 0.7999999999999999
+      storage_strength: 1
+      frequency: 1
+      last_accessed: "2026-06-16"
+    associations:
+      - target_type: engram
+        target: ENG-2026-0615-004
+        strength: 0.3
+        type: co_accessed
+        updated_at: "2026-06-16"
+      - target_type: engram
+        target: ENG-2026-0612-004
+        strength: 0.3
+        type: co_accessed
+        updated_at: "2026-06-16"
+      - target_type: engram
+        target: ENG-2026-0612-005
+        strength: 0.3
+        type: co_accessed
+        updated_at: "2026-06-16"
+      - target_type: engram
+        target: ENG-2026-0613-004
+        strength: 0.3
+        type: co_accessed
+        updated_at: "2026-06-16"
+    knowledge_anchors: []
+    feedback_signals:
+      positive: 0
+      negative: 0
+      neutral: 0
+    polarity: null
+    content_hash: 5fb8b2f0f0f9bfac3e74cd3ac1ba75dee095b979e1440fb86815900f274de339
+    commitment: leaning
+    reference_count: 1
+    sources:
+      - scope: global
+        session_id: null
+        stored_at: "2026-06-15T12:04:46.440Z"
+    recurrence_count: 0
+    engram_version: 1
+    episode_ids: []
+  - id: ENG-2026-0616-001
+    version: 2
+    status: active
+    consolidated: false
+    type: architectural
+    scope: global
+    visibility: public
+    statement: >-
+      ISA v0.6.0 的 JSONL+flock+FTS5 三引擎存储架构中，JSONL 是最稳固的长期基础（纯文本、无锁 schema、永远向前兼容），flock 有 WSL/NFS 边界风险，FTS5
+      是可丢弃的加速层。channels 的按设备分目录设计（分子目录隔离）是工程中最大亮点，但 merge 时间戳排序缺少次要键和混合逻辑时钟是 P0 技术债。
+    derivation_count: 1
+    pack: null
+    abstract: null
+    derived_from: null
+    knowledge_type:
+      memory_class: semantic
+      cognitive_level: evaluate
+    domain: architecture.data
+    tags:
+      - ISA
+      - channels
+      - JSONL
+      - flock
+      - FTS5
+      - architecture
+      - longevity
+    activation:
+      retrieval_strength: 0.7
+      storage_strength: 1
+      frequency: 0
+      last_accessed: "2026-06-16"
+    associations: []
+    knowledge_anchors: []
+    feedback_signals:
+      positive: 0
+      negative: 0
+      neutral: 0
+    polarity: null
+    content_hash: 252125d7d45e47c9338a581407d7fa81ba64aea8062e12dc7a77d729396e1cdb
+    commitment: leaning
+    reference_count: 1
+    sources:
+      - scope: global
+        session_id: null
+        stored_at: "2026-06-16T09:43:04.592Z"
+    recurrence_count: 0
+    engram_version: 1
+    episode_ids: []
+  - id: ENG-2026-0616-002
+    version: 2
+    status: active
+    consolidated: false
+    type: architectural
+    scope: global
+    visibility: private
+    statement: ISA v0.6.0 的 JSONL 存储格式是生命周期最长的组件（纯文本、无 schema、永远向前兼容），channels 设计中分子目录隔离是最扎实的工程决策
+    derivation_count: 1
+    pack: null
+    abstract: null
+    derived_from: null
+    knowledge_type:
+      memory_class: semantic
+      cognitive_level: evaluate
+    tags: []
+    activation:
+      retrieval_strength: 0.7
+      storage_strength: 1
+      frequency: 0
+      last_accessed: "2026-06-16"
+    associations: []
+    knowledge_anchors: []
+    feedback_signals:
+      positive: 0
+      negative: 0
+      neutral: 0
+    polarity: null
+    content_hash: 07a56586f344753e866e05edbc11037528c42455459427f76a37246ebbbff232
+    commitment: leaning
+    reference_count: 1
+    sources:
+      - scope: global
+        session_id: null
+        stored_at: "2026-06-16T09:43:53.739Z"
+    recurrence_count: 0
+    engram_version: 1
+    episode_ids: []
+  - id: ENG-2026-0616-003
+    version: 2
+    status: active
+    consolidated: false
+    type: architectural
+    scope: global
+    visibility: private
+    statement: ISA v0.6.0 有三个 P0 技术债：merge时间戳排序缺少device_id次要键（因果倒置风险）、缺少混合逻辑时钟（HLC）、ingest()每次写入后全量重建FTS5索引
+    derivation_count: 1
+    pack: null
+    abstract: null
+    derived_from: null
+    knowledge_type:
+      memory_class: semantic
+      cognitive_level: evaluate
+    tags: []
+    activation:
+      retrieval_strength: 0.7
+      storage_strength: 1
+      frequency: 0
+      last_accessed: "2026-06-16"
+    associations: []
+    knowledge_anchors: []
+    feedback_signals:
+      positive: 0
+      negative: 0
+      neutral: 0
+    polarity: null
+    content_hash: 50f5bd02b5c72ab6111fdbe40f08ae34598b1c254ebda94862cf275f74617327
+    commitment: leaning
+    reference_count: 1
+    sources:
+      - scope: global
+        session_id: null
+        stored_at: "2026-06-16T09:43:53.756Z"
+    recurrence_count: 0
+    engram_version: 1
+    episode_ids: []
+  - id: ENG-2026-0616-004
+    version: 2
+    status: active
+    consolidated: false
+    type: behavioral
+    scope: global
+    visibility: private
+    statement: 克洛诺斯论断'channels比jiak更重要'成立：channels JSONL是原始证据不可再生，jiak可以从channels重建。但当前channels→jiak自动提炼管道未实现，是ISA生态最大价值缺口
+    derivation_count: 1
+    pack: null
+    abstract: null
+    derived_from: null
+    knowledge_type:
+      memory_class: semantic
+      cognitive_level: apply
+    tags: []
+    activation:
+      retrieval_strength: 0.7
+      storage_strength: 1
+      frequency: 0
+      last_accessed: "2026-06-16"
+    associations: []
+    knowledge_anchors: []
+    feedback_signals:
+      positive: 0
+      negative: 0
+      neutral: 0
+    polarity: null
+    content_hash: 28929bf089a08579ef0e2daeff00a208ddc61bc1b1818f324c0a7958a1b3a402
+    commitment: leaning
+    reference_count: 1
+    sources:
+      - scope: global
+        session_id: null
+        stored_at: "2026-06-16T09:43:53.771Z"
+    recurrence_count: 0
+    engram_version: 1
+    episode_ids: []
+  - id: ENG-2026-0616-005
+    version: 2
+    status: active
+    consolidated: false
+    type: architectural
+    scope: global
+    visibility: private
+    statement: flock在本地ext4上可靠，在NFS/CIFS/WSL /mnt/上行为未定义。一年后如果部署场景变化，flock保护需要升级到fcntl.lockf()或存储适配层
+    derivation_count: 1
+    pack: null
+    abstract: null
+    derived_from: null
+    knowledge_type:
+      memory_class: semantic
+      cognitive_level: evaluate
+    tags: []
+    activation:
+      retrieval_strength: 0.7
+      storage_strength: 1
+      frequency: 0
+      last_accessed: "2026-06-16"
+    associations: []
+    knowledge_anchors: []
+    feedback_signals:
+      positive: 0
+      negative: 0
+      neutral: 0
+    polarity: null
+    content_hash: 52358e4b468c86aea248761bee1b0d801892d1bd17abfad1b5bc96956f422e3b
+    commitment: leaning
+    reference_count: 1
+    sources:
+      - scope: global
+        session_id: null
+        stored_at: "2026-06-16T09:43:53.781Z"
+    recurrence_count: 0
+    engram_version: 1
+    episode_ids: []
+  - id: ENG-2026-0616-006
+    version: 2
+    status: active
+    consolidated: false
+    type: behavioral
+    scope: project:weatherfield
+    visibility: public
+    statement: >-
+      Carrie's Story translation style notes: Mode B 意译雅达信 means literary prose Chinese (not verse), Lu Xun conciseness
+      + Qian Zhongshu wit. Key challenges: translating S/M terminology naturally (collar/cuffs/cane → 项圈/手铐/藤条),
+      preserving narrator's self-deprecating wit, handling Emily Dickinson quotes and cultural references (Carousel,
+      Krazy Kat, Scarlett O'Hara). NSFW content must NOT be sanitized.
+    derivation_count: 1
+    pack: null
+    abstract: null
+    derived_from: null
+    knowledge_type:
+      memory_class: semantic
+      cognitive_level: apply
+    domain: literature.translation
+    tags:
+      - carrie-story
+      - translation
+      - bilingual-mirror
+      - sade-translation-project
+    activation:
+      retrieval_strength: 0.7
+      storage_strength: 1
+      frequency: 0
+      last_accessed: "2026-06-16"
+    associations: []
+    knowledge_anchors: []
+    feedback_signals:
+      positive: 0
+      negative: 0
+      neutral: 0
+    polarity: null
+    content_hash: a2dfba57444f35cffa0dca48d3bebcfa873860eafce0dd53d0554248793baefd
+    commitment: leaning
+    reference_count: 1
+    sources:
+      - scope: project:weatherfield
+        session_id: null
+        stored_at: "2026-06-16T14:36:15.114Z"
+    recurrence_count: 0
+    engram_version: 1
+    episode_ids: []
+    summary: "Carrie's Story translation style notes: Mode B 意译雅达信 means..."
+  - id: ENG-2026-0616-007
+    version: 2
+    status: active
+    consolidated: false
+    type: procedural
+    scope: project:translation
+    visibility: public
+    statement: >-
+      恐惧飞翔(Fear of Flying)翻译工程采用与萨德相同的bilingual-mirror Mode
+      B意译雅达信模式。源文件~11437行/615KB，分10parts并行翻译。原始文本存wiki/raw/literature/jong/fear-of-flying-raw.md，译文存wiki/raw/literature/jong/parts/part{N}-fear.md。翻译铁律一致：NSFW不净化、行号锚点[L###]、术语首次给原文、散文化不诗句化。Erica
+      Jong的作品1973年出版，尚在版权期内（作者1942年生），与萨德公有领域不同需注意。
+    rationale: 恐惧飞翔翻译与萨德翻译使用相同方法论，说明bilingual-mirror Mode B已成为通用经典文学翻译范式，不限于单一作者。
+    derivation_count: 1
+    pack: null
+    abstract: null
+    derived_from: null
+    knowledge_type:
+      memory_class: procedural
+      cognitive_level: apply
+    domain: literature.translation
+    tags:
+      - jong
+      - fear-of-flying
+      - translation
+      - bilingual-mirror
+      - mode-b
+      - parallel-delegation
+    activation:
+      retrieval_strength: 0.7
+      storage_strength: 1
+      frequency: 0
+      last_accessed: "2026-06-16"
+    associations: []
+    knowledge_anchors: []
+    feedback_signals:
+      positive: 0
+      negative: 0
+      neutral: 0
+    polarity: null
+    content_hash: bff09598f01f90b43a6435b832f8e2e570f774ef653126e018d6e84df245af88
+    commitment: leaning
+    reference_count: 1
+    sources:
+      - scope: project:translation
+        session_id: null
+        stored_at: "2026-06-16T16:27:12.944Z"
+    recurrence_count: 0
+    engram_version: 1
+    episode_ids: []
+    summary: 恐惧飞翔(Fear of Flying)翻译工程采用与萨德相同的bilingual-mirror Mode...
+  - id: ENG-2026-0616-008
+    version: 2
+    status: active
+    consolidated: false
+    type: architectural
+    scope: global
+    visibility: public
+    statement: >-
+      并行翻译大规模文学作品的实践模式：将大型源文件按章节切分为独立parts，每个part由独立子Agent翻译，主Agent仅传递2KB上下文而非全部原文。10个子Agent可同时工作，互不干扰。适用于任何超过5000行的文学翻译项目。关键约束：每个子Agent必须有明确的行范围(L起始-结束)、输出路径、格式规范。
+    rationale: 批量并行翻译是一种可复用的工程模式，适用于萨德、Jong、以及未来任何大规模文学翻译项目。
+    derivation_count: 1
+    pack: null
+    abstract: null
+    derived_from: null
+    knowledge_type:
+      memory_class: semantic
+      cognitive_level: evaluate
+    domain: literature.translation
+    tags:
+      - parallel-translation
+      - delegation
+      - scalability
+      - ra-pattern
+    activation:
+      retrieval_strength: 0.7
+      storage_strength: 1
+      frequency: 0
+      last_accessed: "2026-06-16"
+    associations: []
+    knowledge_anchors: []
+    feedback_signals:
+      positive: 0
+      negative: 0
+      neutral: 0
+    polarity: null
+    content_hash: 3297f892ee20f7dd2f190095ff0b3d6b938c53787745d1305b9dbe4154bbf7b7
+    commitment: leaning
+    reference_count: 1
+    sources:
+      - scope: global
+        session_id: null
+        stored_at: "2026-06-16T16:27:13.977Z"
+    recurrence_count: 0
+    engram_version: 1
+    episode_ids: []
+  - id: ENG-2026-0617-001
+    version: 2
+    status: active
+    consolidated: false
+    type: behavioral
+    scope: global
+    visibility: public
+    statement: >-
+      世界情色文学六大传统的核心美学差异：中国=世情+劝惩框架，日本=物哀+浮世绘美学，印度=神圣合一(欲为四目的之一)，阿拉伯/波斯=苏菲隐喻(酒色即神圣)，欧洲=越界+升华(与审查制度搏斗)，古希腊=爱洛斯宇宙力+美善合一。所有传统中审查从未消灭创作，反而催生更精巧的文学策略。
+    rationale: 为bilingual-mirror-translations项目提供跨文明情色文学的美学框架参考
+    derivation_count: 1
+    pack: null
+    abstract: null
+    derived_from: null
+    knowledge_type:
+      memory_class: semantic
+      cognitive_level: apply
+    domain: bilingual-mirror-translations
+    tags:
+      - erotic_literature
+      - comparative_literature
+      - censorship
+      - aesthetics
+      - cross_cultural
+    activation:
+      retrieval_strength: 0.7
+      storage_strength: 1
+      frequency: 0
+      last_accessed: "2026-06-17"
+    associations: []
+    knowledge_anchors: []
+    feedback_signals:
+      positive: 0
+      negative: 0
+      neutral: 0
+    polarity: null
+    content_hash: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    commitment: leaning
+    reference_count: 1
+    sources:
+      - scope: global
+        session_id: null
+        stored_at: "2026-06-17T01:10:02.954Z"
+    recurrence_count: 0
+    engram_version: 1
+    episode_ids: []
+  - id: ENG-2026-0617-002
+    version: 2
+    status: active
+    consolidated: false
+    type: behavioral
+    scope: global
+    visibility: public
+    statement: >-
+      情色文学史中的"劝惩"普遍性：中国"以淫止淫"、欧洲"医学目的"辩护、印度"灵性升华"——各文明都为情色书写寻找道德庇护。萨德在狱中写作，《洛丽塔》被五家美国出版社拒稿后在巴黎出版，凯瑟琳·米莱匿名至1994年——审查与反审查是情色文学史的核心张力。
+    rationale: 为sade-translation-project提供萨德在欧洲审查传统中的定位
+    derivation_count: 1
+    pack: null
+    abstract: null
+    derived_from: null
+    knowledge_type:
+      memory_class: semantic
+      cognitive_level: apply
+    domain: sade-translation-project
+    tags:
+      - sade
+      - censorship
+      - literary_history
+      - publishing
+    activation:
+      retrieval_strength: 0.7
+      storage_strength: 1
+      frequency: 0
+      last_accessed: "2026-06-17"
+    associations: []
+    knowledge_anchors: []
+    feedback_signals:
+      positive: 0
+      negative: 0
+      neutral: 0
+    polarity: null
+    content_hash: 1bc3201a9f24a2fe48f634f90d406aaf6cbf5e36e292870ecba98d74b065ee1b
+    commitment: leaning
+    reference_count: 1
+    sources:
+      - scope: global
+        session_id: null
+        stored_at: "2026-06-17T01:10:03.987Z"
+    recurrence_count: 0
+    engram_version: 1
+    episode_ids: []
+  - id: ENG-2026-0617-003
+    version: 2
+    status: active
+    consolidated: false
+    type: behavioral
+    scope: global
+    visibility: public
+    statement: >-
+      Fata文学可从情色文学史中汲取的隐喻系统：中国以花卉器物替代直写（云雨鱼水），波斯以玫瑰夜莺酒为神醉隐喻，印度以莲花蜜蜂月光喻身体欲望。各传统都发展出精密的"不说而说"的修辞策略，这与fata-gates项目中"显隐二层"的叙事结构有深层同构。
+    rationale: 为fata-gates项目提供跨文明隐喻系统的参考
+    derivation_count: 1
+    pack: null
+    abstract: null
+    derived_from: null
+    knowledge_type:
+      memory_class: semantic
+      cognitive_level: apply
+    domain: fata-gates
+    tags:
+      - metaphor
+      - erotic_literature
+      - narrative_strategy
+      - 隐喻
+      - fata
+    activation:
+      retrieval_strength: 0.7
+      storage_strength: 1
+      frequency: 0
+      last_accessed: "2026-06-17"
+    associations: []
+    knowledge_anchors: []
+    feedback_signals:
+      positive: 0
+      negative: 0
+      neutral: 0
+    polarity: null
+    content_hash: 82b24d5943af54f223a35ca8a5c9f01127c3917ab9be267829141c23901af4fe
+    commitment: leaning
+    reference_count: 1
+    sources:
+      - scope: global
+        session_id: null
+        stored_at: "2026-06-17T01:10:05.013Z"
+    recurrence_count: 0
+    engram_version: 1
+    episode_ids: []
+  - id: ENG-2026-0617-004
+    version: 2
+    status: active
+    consolidated: false
+    type: behavioral
+    scope: global
+    visibility: public
+    statement: >-
+      情色（érotisme/eroticism）与色情（pornographie/pornography）的核心区分：情色以"情"为主导，涉及美学体验、禁忌与逾越的辩证法、主体间的渴望与留白；色情以"色"为主导，将不可见之物商品化，消解了禁忌的深度。词序颠倒暗示价值取向的根本差异。
+    derivation_count: 1
+    pack: null
+    abstract: null
+    derived_from: null
+    knowledge_type:
+      memory_class: semantic
+      cognitive_level: apply
+    domain: philosophy.aesthetics
+    tags:
+      - eroticism
+      - 情色
+      - 色情
+      - aesthetics
+      - Bataille
+    activation:
+      retrieval_strength: 0.7
+      storage_strength: 1
+      frequency: 0
+      last_accessed: "2026-06-17"
+    associations: []
+    knowledge_anchors: []
+    feedback_signals:
+      positive: 0
+      negative: 0
+      neutral: 0
+    polarity: null
+    content_hash: e9387669e9a9eef85653a0ed287608db8df138936c12237ee9aad4f8f4aa371d
+    commitment: leaning
+    reference_count: 1
+    sources:
+      - scope: global
+        session_id: null
+        stored_at: "2026-06-17T01:15:44.374Z"
+    recurrence_count: 0
+    engram_version: 1
+    episode_ids: []
+  - id: ENG-2026-0617-005
+    version: 2
+    status: active
+    consolidated: false
+    type: behavioral
+    scope: global
+    visibility: public
+    statement: >-
+      巴塔耶《情色》核心论点：情色是禁忌与逾越（transgression）的辩证法。禁忌不被废除而是被超越并完成。情色、宗教狂喜、死亡体验指向同一种"连续性"（continuité）——打破个体不连续存在的界限。"情色是生命的肯定，直到死亡。"
+    derivation_count: 1
+    pack: null
+    abstract: null
+    derived_from: null
+    knowledge_type:
+      memory_class: semantic
+      cognitive_level: apply
+    domain: philosophy.aesthetics
+    tags:
+      - Bataille
+      - transgression
+      - sacred
+      - profane
+      - eroticism
+      - 巴塔耶
+    activation:
+      retrieval_strength: 0.7
+      storage_strength: 1
+      frequency: 0
+      last_accessed: "2026-06-17"
+    associations: []
+    knowledge_anchors: []
+    feedback_signals:
+      positive: 0
+      negative: 0
+      neutral: 0
+    polarity: null
+    content_hash: 3613cf5ab00c289aa4aefbe1cbeecb549728aedd0a89df2081609a19c5cc2e9d
+    commitment: leaning
+    reference_count: 1
+    sources:
+      - scope: global
+        session_id: null
+        stored_at: "2026-06-17T01:15:45.391Z"
+    recurrence_count: 0
+    engram_version: 1
+    episode_ids: []
+  - id: ENG-2026-0617-006
+    version: 2
+    status: active
+    consolidated: false
+    type: behavioral
+    scope: global
+    visibility: public
+    statement: >-
+      跨文化情色哲学的七重维度：(1)柏拉图-爱若斯作为凡神之间的精灵/中介性；(2)巴塔耶-禁忌逾越的辩证法/超越性；(3)萨德-欲望作为自然绝对法则/激进性；(4)弗洛伊德-爱欲与死欲的张力/有限性；(5)拉康-性关系之不可能/匮乏性；(6)密宗-身体经验转化灵性觉悟/转化性；(7)中国情色-以欲写情以情写世/世俗性。
+    derivation_count: 1
+    pack: null
+    abstract: null
+    derived_from: null
+    knowledge_type:
+      memory_class: semantic
+      cognitive_level: apply
+    domain: philosophy.aesthetics
+    tags:
+      - eroticism
+      - Plato
+      - Bataille
+      - Sade
+      - Freud
+      - Lacan
+      - Tantra
+      - Chinese aesthetics
+    activation:
+      retrieval_strength: 0.7
+      storage_strength: 1
+      frequency: 0
+      last_accessed: "2026-06-17"
+    associations: []
+    knowledge_anchors: []
+    feedback_signals:
+      positive: 0
+      negative: 0
+      neutral: 0
+    polarity: null
+    content_hash: 8bb0cf6eb9b17d0f7d22b456f121257dc1254e1f01665370476383ea776df414
+    commitment: leaning
+    reference_count: 1
+    sources:
+      - scope: global
+        session_id: null
+        stored_at: "2026-06-17T01:15:47.189Z"
+    recurrence_count: 0
+    engram_version: 1
+    episode_ids: []
