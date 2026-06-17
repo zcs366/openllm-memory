@@ -1,0 +1,7 @@
+# PLUR Config
+embeddings:
+  enabled: false
+  # 2026-06-13: hf-mirror.com 不可达(HTTP 000)，HuggingFace 被墙
+  # 模型文件在 /tmp/bge-small-en-v1.5/ 但无法让 @huggingface/transformers 正确加载
+  # BM25-only 模式稳定运行
+  # 待网络恢复后重试：设置 HF_ENDPOINT + embeddings.enabled: true + 清缓存重启
