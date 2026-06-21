@@ -4,9 +4,12 @@ DreamBridge — Δ胶囊消费ISA Brain梦境日志的桥梁。
 从 ISA Brain 的 brain_dream.jsonl 中读取dream事件，
 转换为 Δ胶囊 TextCapsule + DeltaCapsule（真实语义向量），
 存入 MemoryOS，提供跨Agent的认知查询。
+同时将事件注入Arbiter进行认知矛盾检测。
 
 三角架构:
   ISA(管道) → brain_dream.jsonl → DreamBridge → Δ胶囊(共享记忆)
+                                       ↓
+                                  Arbiter(认知仲裁)
                                                    ↓
                                           查询接口: 谁梦到过什么?
 """
@@ -14,11 +17,11 @@ DreamBridge — Δ胶囊消费ISA Brain梦境日志的桥梁。
 import json
 import time
 import os
+import sys
 
 # HF被墙——强制离线模式，从缓存加载embedding模型
 os.environ.setdefault("HF_HUB_OFFLINE", "1")
 
-import sys
 from pathlib import Path
 from datetime import datetime
 from typing import Optional
@@ -135,7 +138,8 @@ class DreamBridge:
                 results[aid] = {"new_events": 0, "capsules_written": 0}
                 continue
 
-            # 转为胶囊 → 存入MemoryOS
+            # 转为胶囊 → 存入MemoryOS + 注入Arbiter
+            arbiter_insights = []
             mos = MemoryOS(capsule_dir=str(self.capsule_dir))
             capsules_written = 0
             for event in new_events:
@@ -171,13 +175,21 @@ class DreamBridge:
                     mos.write(capsule, delta=delta_vec)
                     capsules_written += 1
 
-                # 上层事件: 记录聚合洞察
+                # 上层事件: 记录聚合洞察+收集arbiter输入
                 if len(event.get("discoveries", [])) > 1:
                     summary_insight = (
                         f"Dream聚合: Agent[{aid}] 本轮发现 "
                         f"{len(event['discoveries'])} 组卡片关联 "
                         f"(温度: {temperature})"
                     )
+                    # 收集insight供Arbiter仲裁
+                    for d in event.get("discoveries", []):
+                        arbiter_insights.append({
+                            "agent_id": aid,
+                            "card_id": d["card_a"],
+                            "content": f"发现{d['card_a']}与{d['card_b']}的关联: {', '.join(d.get('shared_keywords', []))}",
+                            "timestamp": event["timestamp"],
+                        })
                     agg_capsule = TextCapsule(
                         session_id=f"dream-agg-{aid}-{event['timestamp']}",
                         timestamp=datetime.fromisoformat(event["timestamp"]).timestamp(),
@@ -188,11 +200,35 @@ class DreamBridge:
                     mos.write(agg_capsule, delta=agg_delta)
                     capsules_written += 1
 
+            # 注入Arbiter——检测认知矛盾
+            conflicts_detected = 0
+            if arbiter_insights:
+                try:
+                    sys.path.insert(0, str(Path.home() / "projects" / "isa"))
+                    from arbiter import Arbiter
+                    arbiter = Arbiter()
+                    conflicts = arbiter.detect_conflicts(arbiter_insights)
+                    for c in conflicts:
+                        ruling = arbiter.arbitrate(c)
+                        if ruling["verdict"] in ("contradiction", "stalemate"):
+                            conflicts_detected += 1
+                            # 将矛盾也记入胶囊
+                            conflict_capsule = TextCapsule(
+                                session_id=f"arbitration-{aid}-{datetime.now().isoformat()}",
+                                insights=[f"[Arbiter] ⚔️ {ruling['resolution']}"],
+                                decisions=[{"summary": ruling["resolution"], "agent": "arbiter"}],
+                            )
+                            mos.write(conflict_capsule)
+                            capsules_written += 1
+                except ImportError:
+                    pass  # Arbiter不可用时静默继续
+
             self._save_positions()
             results[aid] = {
                 "new_events": len(new_events),
                 "capsules_written": capsules_written,
                 "discoveries": sum(len(e.get("discoveries", [])) for e in new_events),
+                "conflicts_detected": conflicts_detected,
             }
 
         return {
