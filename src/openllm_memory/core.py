@@ -1,8 +1,24 @@
 """
-openllm-memory — Δ胶囊记忆层。真实语义embedding驱动。
+openllm-memory — Δ胶囊·ISA Project的记忆固化系统。
 
-寄生启动策略：不是另一个Agent框架——是每个Agent框架最好的记忆层。
-pip install openllm-memory → 你的Agent从此记得用户。
+定位:
+  ISA Project是一个人工认知架构（人工大脑），分为三层:
+    ISA Layer = 神经纤维（感知-运动系统·Gateway+波扩散+Channel）
+    Brain     = 大脑皮层（个体认知层·brain.py）
+    Δ胶囊     = 记忆固化系统（群体学习·本包）
+
+  Δ胶囊是ISA Project的第三层——负责把Agent个体的认知(dream/insight)
+  固化为跨Agent可查询的群体记忆。
+
+  不是"记忆层"——是记忆固化系统。不是"存储库"——是意识沉积岩。
+  
+寄生启动策略：
+  不是另一个Agent框架——是ISA Project的记忆固化层，
+  任何Agent框架（Hermes、OpenClaw、CC via MCP）只需挂载这一层，
+  立即获得跨会话连续身份和群体认知查询能力。
+
+安装:
+  pip install openllm-memory → 你的Agent从此不再从零学起。
 """
 
 import json

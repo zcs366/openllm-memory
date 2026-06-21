@@ -1,48 +1,42 @@
-# openllm-memory — Δ胶囊记忆层
+# openllm-memory — Δ胶囊·ISA Project的记忆固化系统
 
-**pip install openllm-memory，你的Agent从此记得用户。**
+**pip install openllm-memory，你的Agent从此不再从零学起。**
 
-任何Agent框架（Hermes、OpenClaw、CC via MCP、CX via MCP、自建）只需挂载这一层，立即获得跨会话连续身份。
+Δ胶囊是ISA Project这个人工认知架构的第三层——记忆固化系统（群体学习层）。
+前两层：ISA Layer(神经纤维·感知运动) + Brain Layer(大脑皮层·个体认知)。
 
-## 三句话
+任何Agent框架（Hermes、OpenClaw、CC via MCP）只需挂载这一层，立即获得：
+- 跨会话连续身份（Agent关掉窗口后不再失忆）
+- 跨Agent认知查询（"谁梦到过什么？"）
+- 群体记忆固化（个体洞察 → 共享知识）
 
-- **记忆不是功能模块——是操作系统抽象。** 像文件系统之于程序。
-- **你的Agent关掉窗口后不再失忆。** 下次醒来认得老搭档。
-- **任何框架都能用。** 不是"又一个框架"——是"每个框架最好的记忆层"。
+## 在ISA Project中的位置
 
-## 安装
-
-```bash
-pip install openllm-memory
-
-# MCP server模式（让CC/CX/OpenClaw都能用）
-pip install openllm-memory[mcp]
+```
+ISA Project = 人工认知架构
+├── ISA Layer     = 神经纤维     → gateway.py + 波扩散    — 感知运动
+├── Brain Layer   = 大脑皮层     → brain.py               — 个体认知
+└── Δ胶囊 Layer   = 记忆固化系统  → openllm-memory         — 群体记忆 ← 本包
 ```
 
-## 使用
+## 核心接口
 
 ```python
-from openllm_memory import MemoryOS, TextCapsule, DeltaCapsule
-import numpy as np
-
-# 初始化
-memory = MemoryOS()
+from openllm_memory import MemoryOS, TextCapsule, DeltaCapsule, DreamBridge
 
 # 写入记忆
-text = TextCapsule(
-    session_id="session-001",
-    decisions=[{"summary": "确认架构方向"}],
-    insights=["Agent需要六维躯体"],
-)
-delta = DeltaCapsule(
-    session_id="session-001",
-    vector=np.random.randn(256).astype(np.float32) * 0.01,
-)
-memory.write(text, delta)
+memory = MemoryOS()
+capsule = TextCapsule(session_id="s-001", insights=["..."])
+memory.write(capsule)
+
+# 消费ISA Brain的梦境日志（三角闭环的关键桥梁）
+bridge = DreamBridge()
+result = bridge.consume()  # 增量读取dream事件→转胶囊→存入MemoryOS
+bridge.query("ISA和jika的关系")  # "谁梦到过这个？"
+bridge.hot_topics()            # "本周最热的认知关联"
 
 # 恢复记忆
 ctx = memory.read()
-print(ctx["decisions"])  # ["确认架构方向"]
 ```
 
 ## MCP Server模式
