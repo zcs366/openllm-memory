@@ -12,6 +12,10 @@ from pathlib import Path
 from typing import Optional
 import numpy as np
 
+# HF被墙——强制离线模式，从缓存加载embedding模型
+import os
+os.environ.setdefault("HF_HUB_OFFLINE", "1")
+
 # ── embedding模型配置 ─────────────────────────────
 # 默认384维（all-MiniLM-L6-v2），零GPU依赖，CPU跑
 EMBEDDING_DIM = 384
